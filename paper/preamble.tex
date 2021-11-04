@@ -1,0 +1,30 @@
+\usepackage{algorithm}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{bbm}
+\usepackage{caption}
+\usepackage{color}
+\usepackage{enumitem}
+\usepackage{graphicx}
+\usepackage{mdframed}
+\usepackage{tikz}
+\usepackage{url}
+\usepackage{wrapfig}
+\usepackage{xspace}
+
+% comments
+\newif\ifcomments
+\commentstrue
+\newcommand{\kl}[1]{\ifcomments\textit{\color{blue}[KL] : #1}\fi}
+\newcommand{\vk}[1]{\ifcomments\textit{\color{blue}[VK] : #1}\fi}
+
+% break long urls
+\def\UrlBreaks{\do\/\do-}
+
+% color links
+\hypersetup{
+  colorlinks,
+  linkcolor={red!70!black},  
+  citecolor={red!70!black},
+  urlcolor={blue!70!black}
+}

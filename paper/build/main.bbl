@@ -1,0 +1,116 @@
+%%% -*-BibTeX-*-
+%%% Do NOT edit. File created by BibTeX with style
+%%% ACM-Reference-Format-Journals [18-Jan-2012].
+
+\begin{thebibliography}{4}
+
+%%% ====================================================================
+%%% NOTE TO THE USER: you can override these defaults by providing
+%%% customized versions of any of these macros before the \bibliography
+%%% command.  Each of them MUST provide its own final punctuation,
+%%% except for \shownote{}, \showDOI{}, and \showURL{}.  The latter two
+%%% do not use final punctuation, in order to avoid confusing it with
+%%% the Web address.
+%%%
+%%% To suppress output of a particular field, define its macro to expand
+%%% to an empty string, or better, \unskip, like this:
+%%%
+%%% \newcommand{\showDOI}[1]{\unskip}   % LaTeX syntax
+%%%
+%%% \def \showDOI #1{\unskip}           % plain TeX syntax
+%%%
+%%% ====================================================================
+
+\ifx \showCODEN    \undefined \def \showCODEN     #1{\unskip}     \fi
+\ifx \showDOI      \undefined \def \showDOI       #1{#1}\fi
+\ifx \showISBNx    \undefined \def \showISBNx     #1{\unskip}     \fi
+\ifx \showISBNxiii \undefined \def \showISBNxiii  #1{\unskip}     \fi
+\ifx \showISSN     \undefined \def \showISSN      #1{\unskip}     \fi
+\ifx \showLCCN     \undefined \def \showLCCN      #1{\unskip}     \fi
+\ifx \shownote     \undefined \def \shownote      #1{#1}          \fi
+\ifx \showarticletitle \undefined \def \showarticletitle #1{#1}   \fi
+\ifx \showURL      \undefined \def \showURL       {\relax}        \fi
+% The following commands are used for tagged output and should be
+% invisible to TeX
+\providecommand\bibfield[2]{#2}
+\providecommand\bibinfo[2]{#2}
+\providecommand\natexlab[1]{#1}
+\providecommand\showeprint[2][]{arXiv:#2}
+
+\bibitem[\protect\citeauthoryear{Chen, Chowdhury, Wang, Sabelfeld, Chatterjee,
+  and Fernandes}{Chen et~al\mbox{.}}{2021}]%
+        {DBLP:conf/sp/ChenCWSCF21}
+\bibfield{author}{\bibinfo{person}{Yunang Chen}, \bibinfo{person}{Amrita~Roy
+  Chowdhury}, \bibinfo{person}{Ruizhe Wang}, \bibinfo{person}{Andrei
+  Sabelfeld}, \bibinfo{person}{Rahul Chatterjee}, {and}
+  \bibinfo{person}{Earlence Fernandes}.} \bibinfo{year}{2021}\natexlab{}.
+\newblock \showarticletitle{Data Privacy in Trigger-Action Systems}. In
+  \bibinfo{booktitle}{\emph{42nd {IEEE} Symposium on Security and Privacy, {SP}
+  2021, San Francisco, CA, USA, 24-27 May 2021}}. \bibinfo{publisher}{{IEEE}},
+  \bibinfo{pages}{501--518}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1109/SP40001.2021.00108}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Schoettler, Thompson, Gopalakrishna, and
+  Gupta}{Schoettler et~al\mbox{.}}{2020}]%
+        {DBLP:journals/corr/abs-2009-12447}
+\bibfield{author}{\bibinfo{person}{Sandy Schoettler}, \bibinfo{person}{Andrew
+  Thompson}, \bibinfo{person}{Rakshith Gopalakrishna}, {and}
+  \bibinfo{person}{Trinabh Gupta}.} \bibinfo{year}{2020}\natexlab{}.
+\newblock \showarticletitle{Walnut: {A} low-trust trigger-action platform}.
+\newblock \bibinfo{journal}{\emph{CoRR}}  \bibinfo{volume}{abs/2009.12447}
+  (\bibinfo{year}{2020}).
+\newblock
+\showeprint[arXiv]{2009.12447}
+\urldef\tempurl%
+\url{https://arxiv.org/abs/2009.12447}
+\showURL{%
+\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Surbatovich, Aljuraidan, Bauer, Das, and
+  Jia}{Surbatovich et~al\mbox{.}}{2017}]%
+        {DBLP:conf/www/SurbatovichABDJ17}
+\bibfield{author}{\bibinfo{person}{Milijana Surbatovich},
+  \bibinfo{person}{Jassim Aljuraidan}, \bibinfo{person}{Lujo Bauer},
+  \bibinfo{person}{Anupam Das}, {and} \bibinfo{person}{Limin Jia}.}
+  \bibinfo{year}{2017}\natexlab{}.
+\newblock \showarticletitle{Some Recipes Can Do More Than Spoil Your Appetite:
+  Analyzing the Security and Privacy Risks of {IFTTT} Recipes}. In
+  \bibinfo{booktitle}{\emph{Proceedings of the 26th International Conference on
+  World Wide Web, {WWW} 2017, Perth, Australia, April 3-7, 2017}},
+  \bibfield{editor}{\bibinfo{person}{Rick Barrett}, \bibinfo{person}{Rick
+  Cummings}, \bibinfo{person}{Eugene Agichtein}, {and} \bibinfo{person}{Evgeniy
+  Gabrilovich}} (Eds.). \bibinfo{publisher}{{ACM}},
+  \bibinfo{pages}{1501--1510}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1145/3038912.3052709}
+\showDOI{\tempurl}
+
+
+\bibitem[\protect\citeauthoryear{Ur, Ho, Brawner, Lee, Mennicken, Picard,
+  Schulze, and Littman}{Ur et~al\mbox{.}}{2016}]%
+        {DBLP:conf/chi/UrHBLMPSL16}
+\bibfield{author}{\bibinfo{person}{Blase Ur}, \bibinfo{person}{Melwyn Pak~Yong
+  Ho}, \bibinfo{person}{Stephen Brawner}, \bibinfo{person}{Jiyun Lee},
+  \bibinfo{person}{Sarah Mennicken}, \bibinfo{person}{Noah Picard},
+  \bibinfo{person}{Diane Schulze}, {and} \bibinfo{person}{Michael~L. Littman}.}
+  \bibinfo{year}{2016}\natexlab{}.
+\newblock \showarticletitle{Trigger-Action Programming in the Wild: An Analysis
+  of 200, 000 {IFTTT} Recipes}. In \bibinfo{booktitle}{\emph{Proceedings of the
+  2016 {CHI} Conference on Human Factors in Computing Systems, San Jose, CA,
+  USA, May 7-12, 2016}}, \bibfield{editor}{\bibinfo{person}{Jofish Kaye},
+  \bibinfo{person}{Allison Druin}, \bibinfo{person}{Cliff Lampe},
+  \bibinfo{person}{Dan Morris}, {and} \bibinfo{person}{Juan~Pablo Hourcade}}
+  (Eds.). \bibinfo{publisher}{{ACM}}, \bibinfo{pages}{3227--3231}.
+\newblock
+\urldef\tempurl%
+\url{https://doi.org/10.1145/2858036.2858556}
+\showDOI{\tempurl}
+
+
+\end{thebibliography}
