@@ -1,3 +1,30 @@
 \section{Introduction}
 \label{sec:intro}
 
+Trigger-action platforms (TAPs), such as IFTTT, comprise several parts:
+\emph{services}, \emph{platforms}, and \emph{applets}. A client can install an
+applet that connects two services together on a platform. For example, suppose
+the client wears a Fitbit to track their sleep duration. If the Fitbit records a
+sleep duration under some target duration, then the platform adds a reminder to
+the client's Google Calendar to sleep more the next day. The platform connects
+the Fitbit and Google Calendar services together through the applet ``If sleep
+is under a target duration, then add a reminder to Google Calendar.'' \kl{This
+  example is from the Walnut paper~\cite{DBLP:journals/corr/abs-2009-12447}, but
+  we should come with another, more compelling example.}
+
+Today's TAPs learn quite a bit of information about clients:
+\begin{itemize}[leftmargin=*]
+  \item the services (Fitbit and Google Calendar),
+  \item the applet semantics (``If sleep is under a target duration, then add a
+    reminder to Google Calendar.''),
+  \item inputs to the applet (sleep duration), and
+  \item outputs to the action service (the reminder).
+\end{itemize}
+
+Privacy-preserving TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and
+Walnut~\cite{DBLP:journals/corr/abs-2009-12447}) propose using multi-party
+computation (MPC) to hide inputs to the applet from the TAP. However, prior work
+doesn't cover these other sources of leakage, which are substantial. Ideally,
+the TAP should learn no information about the client (besides timing
+information). In this project, we ask if such a TAP design is possible, and if
+so, what are the costs?
