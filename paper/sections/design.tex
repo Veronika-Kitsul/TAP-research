@@ -1,2 +1,42 @@
 \section{Design}
 \label{sec:design}
+
+Things we want to hide from the TAP (in order from most important to least
+important):
+\begin{itemize}[leftmargin=*]
+  \item inputs to the applet (sleep duration),
+  \item outputs to the action service (the reminder),
+  \item the applet semantics (``If sleep is under a target duration, then add a
+    reminder to Google Calendar.''), and
+  \item the services (Fitbit and Google Calendar).
+\end{itemize}\bigskip
+
+Unavoidable leakage that we might be able to leverage:
+\begin{itemize}[leftmargin=*]
+  \item The trigger service (Fitbit) already knows the inputs to the applet
+    (sleep duration).
+  \item The action service (Google Calendar) will see the outputs (the
+    reminder).
+\end{itemize}\bigskip
+
+How to hide the inputs to the applet?
+\begin{itemize}[leftmargin=*]
+  \item \emph{Multi-party computation (MPC).} The trigger service and TAP can
+    run a 2-PC to hide the inputs from the TAP.
+    \begin{itemize}
+      \item Pros: General-purpose (can compute any function over the inputs) and
+        achieves the desired notion of privacy (learns nothing about inputs
+        except what can be inferred from output)
+      \item Cons: Complicated and expensive, may require the client to be online
+        periodically, doesn't seem like the right tool for the job since the TAP
+        has no inputs, can't hide applet semantics from the TAP
+    \end{itemize}
+  \item \emph{Trigger service computation.} The trigger service computes the
+    conditional (i.e., ``If sleep is under a target duration'').
+    \begin{itemize}
+      \item Pros: Simple and efficient, achieves the desired notation of
+        privacy, maybe still possible to hide applet semantics from the TAP
+      \item Cons: Requires trigger service to do work (significant change from
+        how things are done today)
+    \end{itemize}
+\end{itemize}
