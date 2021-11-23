@@ -3,6 +3,8 @@ TAP-research
 
 Questions of the week:
 - when using say Go or Rust, would we want to take advantage of parallel computations (Go has it built-in and Rust uses rayon lib)
+- do we cite the dataset separately from the paper about the dataset? (I assume so because those two have different links)
+- open bibtex: some of the links have % sign that LaTeX reads as start of a comment, so should I go back and use the tex format for %?
 
 
 Decided to use Rust because:
