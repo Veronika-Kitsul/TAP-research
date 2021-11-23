@@ -25,3 +25,7 @@ Background section plan
 - TAP
 - talk about different TAPs, like IFTTT, Zappier, etc.
 - what else? 
+
+Notes to Veronika (myself):
+- fix bibtex for two articles I am planning to add and make sure that citation key is different for them
+- https://ifttt.com/plans. --- cite it for ifttt services
