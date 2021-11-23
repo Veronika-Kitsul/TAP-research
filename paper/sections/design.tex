@@ -31,6 +31,9 @@ How to hide the inputs to the applet?
         periodically, doesn't seem like the right tool for the job since the TAP
         has no inputs, can't hide applet semantics from the TAP
     \end{itemize}
+  \item \emph{Private function evaluation (PFE).} PFE hides both the input and
+    the function being computed~\cite{DBLP:conf/eurocrypt/MohasselS13}, though
+    it might be very slow.
   \item \emph{Trigger service computation.} The trigger service computes the
     conditional (i.e., ``If sleep is under a target duration'').
     \begin{itemize}
@@ -68,4 +71,25 @@ How to hide the applet semantics?
 How to hide the services?
 \begin{itemize}[leftmargin=*]
   \item This is probably too hard (probably have to add proxies).
-\end{itemize}
+\end{itemize}\bigskip
+
+\paragraph{Protocol flow.}
+The client installs an applet as follows:
+\begin{enumerate}[leftmargin=*]
+\item The client generates a key pair $(\sk, \pk)$.
+\item The client sends $\sk$ to the action service and $\pk$ to the trigger
+  service.
+\item On the trigger service, the client installs a rule with an action
+  encrypted to the action service.
+\item On the TAP, the client configures forwarding/polling rules between trigger
+  service and action service.
+\end{enumerate}
+Applets run as follows:
+\begin{enumerate}[leftmargin=*]
+\item The trigger service evaluates the rule, and encrypts the resulting bit to
+  the action service. If the result is 1, then the trigger service sends the
+  encrypted action to the TAP. Otherwise, if the result is 0, then the trigger
+  service sends an encryption of zeros to the TAP.
+\item The TAP forwards the message to the action service.
+\item The action service decrypts the message and executes the action if valid.
+\end{enumerate}
