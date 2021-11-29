@@ -7,6 +7,8 @@ Questions of the week:
    * https://dl.acm.org/doi/10.1145/3131365.3131369
    * https://dl.acm.org/doi/10.1145/2858036.2858556
 
+--------
+
 Decided to use Rust because:
   - _very_ fast = if you code it really well, you can even reach almost full potential of the hardware you are running on
   - many more features available
@@ -20,17 +22,19 @@ Decided to use Rust because:
   - might as well learn to code well
   - anyways, people say they hugely learned Go in two days, so if something goes very wrong, we can switch in no time
 
+---------
 
 Background section plan
 - TAP
 - talk about different TAPs, like IFTTT, Zappier, etc.
 - what else? 
-
+----------
 
 Notes to Veronika (myself):
 - fix bibtex for two articles I am planning to add and make sure that citation key is different for them
 - https://ifttt.com/plans. --- cite it for ifttt services
 
+----------
 **Preliminary Timeline starting week of 11/18/2021:**
 
   Week 1 (of Mon Nov 22)
