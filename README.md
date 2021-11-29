@@ -2,15 +2,13 @@ TAP-research
 ------------
 
 Questions of the week:
-- when using say Go or Rust, would we want to take advantage of parallel computations (Go has it built-in and Rust uses rayon lib)
 - do we cite the dataset separately from the paper about the dataset? (I assume so because those two have different links)
-- open bibtex: some of the links have % sign that LaTeX reads as start of a comment, so should I go back and use the tex format for %?
 - I don't have access to two of the papers in the bibliography:
    * https://dl.acm.org/doi/10.1145/3131365.3131369
    * https://dl.acm.org/doi/10.1145/2858036.2858556
 
 Decided to use Rust because:
-  - _very_ fast = if you code it really well, you can even reach almost full potential of the hardware you are running on (but a **Q: if we run it on the server, does it still apply and uses server's perfomance to the maximum?**)
+  - _very_ fast = if you code it really well, you can even reach almost full potential of the hardware you are running on
   - many more features available
   - extensive support system with guides, videos, users...
   - you can build concurrency, though manually
@@ -28,6 +26,25 @@ Background section plan
 - talk about different TAPs, like IFTTT, Zappier, etc.
 - what else? 
 
+
 Notes to Veronika (myself):
 - fix bibtex for two articles I am planning to add and make sure that citation key is different for them
 - https://ifttt.com/plans. --- cite it for ifttt services
+
+**Preliminary Timeline starting week of 11/18/2021:**
+  Week 1 (of Mon Nov 22)
+    - Background finish what I can
+    - High-level design overview
+
+  Week 2 (of Mon Nov 29)
+    - Design details:
+       * required crypto protocols
+       * protocol flow -> UML sequence diagram
+
+  Week 3 (of Mon Dec 6)
+  - Security Analysis
+  - Specify privacy and functionality goals
+  - Start security proofs
+
+  Week 4 (of Mon Dec 13)
+  - Implementation details: software
