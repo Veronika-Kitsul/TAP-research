@@ -34,13 +34,13 @@ Notes to Veronika (myself):
 **Preliminary Timeline starting week of 11/18/2021:**
 
   Week 1 (of Mon Nov 22)
-    - Background finish what I can
-    - High-level design overview
+  - Background finish what I can
+  - High-level design overview
 
   Week 2 (of Mon Nov 29)
-    - Design details:
-       * required crypto protocols
-       * protocol flow -> UML sequence diagram
+  - Design details:
+    * required crypto protocols
+    * protocol flow -> UML sequence diagram
 
   Week 3 (of Mon Dec 6)
   - Security Analysis
