@@ -32,6 +32,7 @@ Notes to Veronika (myself):
 - https://ifttt.com/plans. --- cite it for ifttt services
 
 **Preliminary Timeline starting week of 11/18/2021:**
+
   Week 1 (of Mon Nov 22)
     - Background finish what I can
     - High-level design overview
