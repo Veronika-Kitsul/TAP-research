@@ -4,6 +4,7 @@ TAP-research
 Questions of the week:
 - PFE - is the only con potential slowliness? Shall we make a pros and cons list?
 - I feel like PFE sounds better than MPC here and might be a good and potentially novel (?) way to go for TAP, does it? 
+- Can you explain the abstract of paper 6 on PFE in more general terms? 
 
 ---------
 
