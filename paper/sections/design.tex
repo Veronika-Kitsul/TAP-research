@@ -93,7 +93,16 @@ Applets run as follows:
 \item The TAP forwards the message to the action service.
 \item The action service decrypts the message and executes the action if valid.
 \end{enumerate}
+
+\bigskip
 Questions to think about:
 \begin{itemize}[leftmargin=*]
 \item How to add integrity?
+\item Xiangchang Mi et al. paper creates a service on IFTTT to see the interaction from both channels,
+while testing we would need to the same thing and see how much we can learn about the recipe or
+other things.
+\item same paper found the delays between triggers and actions because of IFTTT's long polling interval (sometimes up to 15min, usually 1-2min) -- try to see if we can find what is the IFTTT's polling interval and if we can improve it without traffic overload?
+\item same paper: when multiple applets run sequentially and concurrently, they form explicit and implicit infinite loops, wasting or damaging devices. How can we improve this?
 \end{itemize}
+
+
