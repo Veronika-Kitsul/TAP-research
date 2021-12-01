@@ -2,10 +2,7 @@ TAP-research
 ------------
 
 Questions of the week:
-- do we cite the dataset separately from the paper about the dataset? (I assume so because those two have different links)
-- I don't have access to two of the papers in the bibliography:
-   * https://dl.acm.org/doi/10.1145/3131365.3131369
-   * https://dl.acm.org/doi/10.1145/2858036.2858556
+
 
 ---------
 
