@@ -3,7 +3,7 @@ TAP-research
 
 Questions of the week:
 - PFE - is the only con potential slowliness? Shall we make a pros and cons list?
-- I feel like PFE sounds better than MPC here and might be a good and potentially novel (?) way to go for TAP, does it? 
+- I feel like PFE sounds better than MPC here and might be a good and potentially novel (?) way to go for TAP, does it? Or does it come together with MPC, I am a bit confused?
 - Can you explain the abstract of paper 6 on PFE in more general terms? 
 - How can I contribute more to creating a protocol flow? When do you think we will be ready to create an UML diagram?
 
