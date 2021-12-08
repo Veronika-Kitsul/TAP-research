@@ -15,10 +15,11 @@ Questions of the week:
 - composition = protocols in conjunction with each other? page 26
 - other details like commitment and zero-knowledge - are they helpful for us here?
 
-
+------
 IFTTT:
 - Get a reminder to check your accounts on a monthly basis, so you can follow up and see the balance sheet for your home or business and see the trend, https://ifttt.com/applets/D2YzAP9W-check-accounts-monthly?term=balance
 - Wifi password from google assistant https://ifttt.com/applets/EQ6xwrTD-wifi-password?term=password
+- For new account notifications sent to your email. Toodledo will store basic information. Then later add login and password to Toodledo, or your password manager https://ifttt.com/applets/HnDGSTkE-new-accounts?term=password
 ---------
 
 Background section plan
