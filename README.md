@@ -20,6 +20,7 @@ IFTTT:
 - Get a reminder to check your accounts on a monthly basis, so you can follow up and see the balance sheet for your home or business and see the trend, https://ifttt.com/applets/D2YzAP9W-check-accounts-monthly?term=balance
 - Wifi password from google assistant https://ifttt.com/applets/EQ6xwrTD-wifi-password?term=password
 - For new account notifications sent to your email. Toodledo will store basic information. Then later add login and password to Toodledo, or your password manager https://ifttt.com/applets/HnDGSTkE-new-accounts?term=password
+- Create a customizable form to collect details from paid members into Google Sheets. On a successful enable, a shareable URL to a custom form will be sent to your IFTTT email address. Only members of your channel can use the custom form. If enabled, an email will be sent when a member submits the form to you. https://ifttt.com/connections/DsztxHNf-collect-paid-member-details?term=address
 ---------
 
 Background section plan
