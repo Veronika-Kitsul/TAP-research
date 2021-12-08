@@ -18,6 +18,7 @@ Questions of the week:
 
 IFTTT:
 - Get a reminder to check your accounts on a monthly basis, so you can follow up and see the balance sheet for your home or business and see the trend, https://ifttt.com/applets/D2YzAP9W-check-accounts-monthly?term=balance
+- Wifi password from google assistant https://ifttt.com/applets/EQ6xwrTD-wifi-password?term=password
 ---------
 
 Background section plan
