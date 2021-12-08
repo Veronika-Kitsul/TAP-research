@@ -14,6 +14,10 @@ Questions of the week:
 - don't really understand security with abort, but if it's irrelevant, you don't have to explain
 - composition = protocols in conjunction with each other? page 26
 - other details like commitment and zero-knowledge - are they helpful for us here?
+
+
+IFTTT:
+- Get a reminder to check your accounts on a monthly basis, so you can follow up and see the balance sheet for your home or business and see the trend, https://ifttt.com/applets/D2YzAP9W-check-accounts-monthly?term=balance
 ---------
 
 Background section plan
