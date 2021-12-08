@@ -21,6 +21,7 @@ IFTTT:
 - Wifi password from google assistant https://ifttt.com/applets/EQ6xwrTD-wifi-password?term=password
 - For new account notifications sent to your email. Toodledo will store basic information. Then later add login and password to Toodledo, or your password manager https://ifttt.com/applets/HnDGSTkE-new-accounts?term=password
 - Create a customizable form to collect details from paid members into Google Sheets. On a successful enable, a shareable URL to a custom form will be sent to your IFTTT email address. Only members of your channel can use the custom form. If enabled, an email will be sent when a member submits the form to you. https://ifttt.com/connections/DsztxHNf-collect-paid-member-details?term=address
+- If someone calls, start maps and show his location, https://ifttt.com/applets/hJMKghVa-if-someone-calls-start-maps-and-show-his-location?term=location
 ---------
 
 Background section plan
