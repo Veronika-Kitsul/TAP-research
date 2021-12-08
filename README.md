@@ -33,6 +33,7 @@ Background section plan
 Notes to Veronika (myself):
 - fix bibtex for two articles I am planning to add and make sure that citation key is different for them
 - https://ifttt.com/plans. --- cite it for ifttt services
+- write about MPC and garbled circuits
 
 ----------
 **Preliminary Timeline starting week of 11/18/2021:**
