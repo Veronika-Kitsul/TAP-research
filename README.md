@@ -3,6 +3,9 @@ TAP-research
 
 Questions of the week:
 
+- should I motivate not hiding c1 from the trigger? in the design section?
+- do we write anything about semi-honest security in the background or desing, or do we not talk about it explicitly?
+
 ------
 IFTTT:
 - Wifi password from google assistant https://ifttt.com/applets/EQ6xwrTD-wifi-password?term=password
