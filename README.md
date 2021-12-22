@@ -5,8 +5,8 @@ Questions of the week:
 
 - should I motivate not hiding c1 from the trigger? in the design section?
 - do we write anything about semi-honest security in the background or design, or do we not talk about it explicitly?
-- crypto book, page 32-33, all of MPC protocols discussed build on oblivious transfer, what do they mean by it?
-- do we use purely Yao's GC or sth else?
+- crypto book, page 32-33, all of MPC protocols discussed build on oblivious transfer, what do they mean by it? 
+- do we use purely Yao's GC or sth else? should I describe only how Yao's GC work in the background? does the original paper we've read use the same protocol? 
 - page 33, "whille not having the best known communication complexity" - what does it mean, do we want the communication to be complex?
 - same place refers to other protocols that get more complicated as the communication rounds increase, so why are Yao's circuits different? Do they simply not offer such complexity and that's it?
 
@@ -28,6 +28,8 @@ Notes to Veronika (myself):
 - fix bibtex for two articles I am planning to add and make sure that citation key is different for them
 - https://ifttt.com/plans. --- cite it for ifttt services
 - oaf tokens and API
+
+maybe google will be comfortable with their emails on IFTTT using this new design
 
 ----------
 **Preliminary Timeline starting week of 11/18/2021:**
