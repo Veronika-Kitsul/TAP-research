@@ -4,7 +4,7 @@ TAP-research
 Questions of the week:
 
 - should I motivate not hiding c1 from the trigger? in the design section?
-- do we write anything about semi-honest security in the background or desing, or do we not talk about it explicitly?
+- do we write anything about semi-honest security in the background or design, or do we not talk about it explicitly?
 
 ------
 IFTTT:
