@@ -2,42 +2,60 @@
 \label{sec:problem}
 
 In a trigger-action system, there is a client, $T$ trigger services, $A$ action
-services, and a trigger-action platform (TAP). Each trigger service $i \in [T]$
-exposes a set of predicates $\mathbf{P}_i$ that activate the trigger service. A
+services, and a trigger-action platform (TAP). Each trigger service $t \in [T]$
+exposes a set of predicates $\mathbf{P}_t$ that activate the trigger service. A
 predicate $p : \mathcal{X} \times \mathcal{C} \to \{0,1\}$ takes as input
 trigger data $x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$, and
-outputs a bit. Each action service $i \in [A]$ exposes a set of transformations
-$\mathbf{T}_i$ that activate the action service. Each transformation $f :
+outputs a bit. Each action service $a \in [A]$ exposes a set of transformations
+$\mathbf{T}_a$ that activate the action service. Each transformation $f :
 \mathcal{X} \times \mathcal{C} \to \mathcal{Y}$ also takes as input trigger data
 $x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$, and outputs an action
 $y \in \mathcal{Y}$.
 
-The client sets up a recipe by selecting:
+To set up the basic recipe with the TAP, the client specifies:
 \begin{itemize}
   \item a trigger service $t \in [T]$, a predicate $p \in \mathbf{P}_t$, and a
     trigger constant $c_t \in \mathcal{C}$;
   \item an action service $a \in [A]$, a transformation $f \in \mathbf{T}_a$,
-    and an action trigger $c_a \in \mathcal{C}$.
+    and an action constant $c_a \in \mathcal{C}$.
 \end{itemize}
 When the trigger service $t$ receives trigger data $x_t \in \mathcal{X}$, the
 recipe executes as follows:
 \[
-  \text{if}~p(x_t, c_t)\text{, then send}~f(x_t, c_a)~\text{to}~a.
+  \text{if}~p(x_t, c_t) = 1\text{, then send}~f(x_t, c_a)~\text{to}~a.
 \]
 
-In today's TAPs, such as IFTTT, trigger data is sent to the TAP and rules are
-executed entirely on the TAP. In \textsf{eTAP}~\cite{DBLP:conf/sp/ChenCWSCF21},
-rules are executed using MPC, so the TAP learns neither the trigger data nor the
-user-supplied constants. We explore another point in this design space that we
-argue achieves privacy at much lower cost and complexity.
+In today's TAPs, such as IFTTT, both trigger data and user constants are
+supplied to the TAP in the clear, which executes the recipe. This leaks all
+information, including the results of the computation.
 
-Our two key observations are the following:
+In \textsf{eTAP}~\cite{DBLP:conf/sp/ChenCWSCF21}, recipes are executed using MPC
+(i.e., $p(x_t, c_t)$ and $f(x_t, c_a)$ are executed in MPC), which achieves the
+following security properties, stated informally:
 \begin{itemize}
-  \item A fixed set of predicates are offered by each trigger service.
-  \item User-supplied trigger constants are often not sensitive data to the
-    trigger services.
+  \item the TAP does not learn the trigger data $x_t$, the user constants $c_t,
+    c_a$, or the results of the computation;
+  \item the trigger service does not learn the user constants $c_t, c_a$; and
+  \item the action service does not learn the trigger data $x_t$, the user
+    constants $c_t, c_a$, or the output $f(x_t, c_a)$ if $p(x_t, c_t) = 0$.
 \end{itemize}
-Given these observations, in our design, we push the computation of the
+
+While \textsf{eTAP} achieves strong privacy guarantees, we explore another point
+in the design space that we argue achieves strong privacy, but with much lower
+cost and complexity. Our two key observations are the following:
+\begin{itemize}
+  \item Each trigger service pre-defines a fixed set of predicates. These
+    pre-defined predicates are far more widely used than arbitrary user-defined
+    predicates.
+  \item User-supplied trigger constants $c_t$ are often not particularly
+    sensitive to trigger services. Consider the predicate ``email subject line
+    contains the word \emph{confidential},'' where the keyword
+    \emph{confidential} is the trigger constant. In this example, the email
+    trigger service sees all email subject lines (the trigger data) in the
+    clear, so hiding the trigger keyword does not buy much (but certainly
+    \emph{some}) in the way of privacy.
+\end{itemize}
+Given these observations, in our TAP design, we push the computation of the
 predicate $p(x_t, c_t)$ to the trigger service---$p$ is not arbitrary
 client-supplied code and $x_t$ and $c_t$ need not be hidden from the trigger
 service. \kl{The computation of $p$ is also probably cheaper than encoding
