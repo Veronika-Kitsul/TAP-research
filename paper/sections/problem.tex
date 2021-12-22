@@ -1,0 +1,26 @@
+\section{Problem statement}
+\label{sec:problem}
+
+In a trigger-action system, there is a client, $T$ trigger services, $A$ action
+services, and a trigger-action platform (TAP). Each trigger service $i \in [T]$
+exposes a set of predicates $\mathbf{P}_i$ that activate the trigger service. A
+predicate $p : \mathcal{X} \times \mathcal{C} \to \{0,1\}$ takes as input
+trigger data $x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$, and
+outputs a bit. Each action service $i \in [A]$ exposes a set of transformations
+$\mathbf{T}_i$ that activate the action service. Each transformation $f :
+\mathcal{X} \times \mathcal{C} \to \mathcal{Y}$ also takes as input trigger data
+$x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$, and outputs an action
+$y \in \mathcal{Y}$.
+
+The client sets up a recipe by selecting:
+\begin{itemize}
+  \item a trigger service $t \in [T]$, a predicate $p \in \mathbf{P}_t$, and a
+    trigger constant $c_t \in \mathcal{C}$;
+  \item an action service $a \in [A]$, a transformation $f \in \mathbf{T}_a$,
+    and an action trigger $c_a \in \mathcal{C}$.
+\end{itemize}
+When the trigger service $t$ receives trigger data $x_t \in \mathcal{X}$, the
+recipe executes as follows:
+\[
+  \text{if}~p(x_t, c_t)\text{, then send}~f(x_t, c_a)~\text{to}~a.
+\]
