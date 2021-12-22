@@ -29,6 +29,8 @@ Notes to Veronika (myself):
 - https://ifttt.com/plans. --- cite it for ifttt services
 - oaf tokens and API
 
+maybe google will be comfortable with their emails on IFTTT using this new design
+
 ----------
 **Preliminary Timeline starting week of 11/18/2021:**
 
