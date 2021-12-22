@@ -17,9 +17,18 @@ The IFTTT ("If This, Then That") platform is one of the first and the most popul
 over 700 services and more than 20 million users around the world (ifttt website and ~\cite{DBLP:conf/spChenCWSCF21}. Clients configure the system by specifying triggers ("if my Fitbit sends a sleep data")
 and actions ("create a Google Calendar reminder to sleep more"). 
 
+
 \subsection{Cryptography Behind the Design}
 
 \subsubsection{Multi-Party Computation}
 
+Secure multi-party computation (MPC) enables a computation within a group of devices without revealing
+any participant's private information. MPC allows verifiable computation, meaning the participants then
+may confirm the result of the function they agreed on computing. Since its invention by Andrew Yao in
+1982, the topic has attracted many researchers and evolved from theory to an important practical tool for
+all kinds of applications. [the book]
+
+
 \subsubsection{Garbled Circuits}
 
+The first Garbled Circuits Protocols was introduced by Yao a few years after his first publication on MPC. It remains the basis for some of the most efficient MPC implementations. 
