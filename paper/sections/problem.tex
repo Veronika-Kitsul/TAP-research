@@ -24,3 +24,32 @@ recipe executes as follows:
 \[
   \text{if}~p(x_t, c_t)\text{, then send}~f(x_t, c_a)~\text{to}~a.
 \]
+
+In today's TAPs, such as IFTTT, trigger data is sent to the TAP and rules are
+executed entirely on the TAP. In \textsf{eTAP}~\cite{DBLP:conf/sp/ChenCWSCF21},
+rules are executed using MPC, so the TAP learns neither the trigger data nor the
+user-supplied constants. We explore another point in this design space that we
+argue achieves privacy at much lower cost and complexity.
+
+Our two key observations are the following:
+\begin{itemize}
+  \item A fixed set of predicates are offered by each trigger service.
+  \item User-supplied trigger constants are often not sensitive data to the
+    trigger services.
+\end{itemize}
+Given these observations, in our design, we push the computation of the
+predicate $p(x_t, c_t)$ to the trigger service---$p$ is not arbitrary
+client-supplied code and $x_t$ and $c_t$ need not be hidden from the trigger
+service. \kl{The computation of $p$ is also probably cheaper than encoding
+  inputs for MPC. Also computing $p$ in MPC can be quite expensive (e.g., due to
+  substring operations).}
+
+The computation of the transformation $f(x_t, c_a)$, however, mixes data from
+the trigger service ($x_t$) and data intended for the action service ($c_a$), so
+this is executed using MPC on the TAP. To summarize the privacy properties we
+are after:
+\begin{itemize}
+  \item The TAP shouldn't learn $x_t, c_t, c_a$ or the results of $f(x_t, c_a)$.
+  \item The action service shouldn't learn $x_t$, except what can be inferred
+    from the output of $f(x_t, c_a)$.
+\end{itemize}
