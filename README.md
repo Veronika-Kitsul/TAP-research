@@ -4,7 +4,7 @@ TAP-research
 Questions of the week:
 
 - do we use TCP/IP or add other protocols to our network?
-- develope further timeline?
+- develop further timeline?
 - 
 
 
