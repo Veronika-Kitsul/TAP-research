@@ -7,6 +7,7 @@ Questions of the week:
 - develop further timeline?
 - i think i've downloaded the mpc library BUT not via docker (through wget), how do I check if I actually did download it?
 - docker image creation from github help?
+- learned to create mobile apps on android studio
 
 
 ------
