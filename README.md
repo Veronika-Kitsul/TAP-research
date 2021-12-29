@@ -51,3 +51,23 @@ maybe google will be comfortable with their emails on IFTTT using this new desig
 
   Week 4 (of Mon Dec 13)
   - Implementation details: software
+
+------
+January timeline
+Week 1 (of Jan sth)
+- write networking code
+- mpc library setup
+- finish design
+
+Week 2 
+- android app design
+- design a high-level overview diagram
+- think of the sequence diagram design
+
+Week 3
+- security proofs
+- security analysis
+
+Week 4
+- start setting up the experiments
+- evaluating metrics: latency, how many requests per min, communication cost
