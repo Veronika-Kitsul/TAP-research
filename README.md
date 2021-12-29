@@ -28,7 +28,7 @@ Background section plan
 Notes to Veronika (myself):
 - fix bibtex for two articles I am planning to add and make sure that citation key is different for them
 - https://ifttt.com/plans. --- cite it for ifttt services
-- oaf tokens and API
+- oauth tokens and API
 
 maybe google will be comfortable with their emails on IFTTT using this new design
 
