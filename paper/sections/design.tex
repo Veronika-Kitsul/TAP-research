@@ -1,6 +1,38 @@
 \section{Design}
 \label{sec:design}
 
+\subsection{Protocol}
+
+\paragraph{Setup.}
+Each trigger service $t \in [T]$ has a key pair $(\skt_t, \pkt_t)$ and each
+action service $a \in [A]$ has a key pair $(\ska_a, \pka_a)$.
+
+\paragraph{Recipe setup.}
+To set up a recipe, the client specifies the following through the trusted
+mobile client:
+\begin{itemize}
+  \item a trigger service $t \in [T]$, a predicate $p \in \mathbf{P}_t$, and a
+    trigger constant $c_t \in \mathcal{C}$;
+  \item an action service $a \in [A]$, a transformation $f \in \mathbf{T}_a$,
+    and an action constant $c_a \in \mathcal{C}$.
+\end{itemize}
+
+\begin{enumerate}
+  \item The client sends the following to the TAP: $(t, p, \ct_t)$ and $(a, f)$,
+    where $\ct_t = \enc(\skt_t, c_t)$.
+  \item The TAP forwards $(p, \ct_t)$ to $t$ and negotiates the necessary OAuth
+    tokens with $a$ for running the recipe.
+\end{enumerate}
+
+\paragraph{Garbled circuit generation.}
+\kl{TODO.}
+
+\paragraph{Recipe execution.}
+\kl{TODO.}
+
+\subsection{Security analysis}
+
+\iffalse
 Things we want to hide from the TAP (in order from most important to least
 important):
 \begin{itemize}[leftmargin=*]
@@ -104,3 +136,4 @@ other things.
 \item same paper found the delays between triggers and actions because of IFTTT's long polling interval (sometimes up to 15min, usually 1-2min) -- try to see if we can find what is the IFTTT's polling interval and if we can improve it without traffic overload?
 \item same paper: when multiple applets run sequentially and concurrently, they form explicit and implicit infinite loops, wasting or damaging devices. How can we improve this?
 \end{itemize}
+\fi
