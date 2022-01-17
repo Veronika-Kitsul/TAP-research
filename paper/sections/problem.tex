@@ -88,6 +88,18 @@ recipe executes as follows:
 For simpler recipes, the predicate can execute entirely on the trigger service
 and the transformation can execute entirely on the action service. In this
 setting, we ask whether we can hide more information from the TAP, such as the
-rule semantics and the services involved. \kl{Is it a bad idea if trigger
-  services communicate directly with action services? Otherwise, can a client
-  install a rule and have it execute anonymously?}
+rule semantics and the services involved.
+
+\kl{Is it a bad idea if trigger services communicate directly with action
+  services?}
+\begin{itemize}
+  \item Trigger services have access to and store OAuth tokens.
+  \item Each trigger service essentially has to run a TAP.
+\end{itemize}
+
+\kl{Otherwise, can a client install a rule and have it execute anonymously?}
+\begin{itemize}
+  \item Authenticated client can buy anonymous token to install a rule.
+  \item Client can anonymously install a rule by presenting anonymous
+    token. \kl{How to handle OAuth tokens? TODO: Figure out how they work.}
+\end{itemize}
