@@ -71,3 +71,35 @@ are after:
   \item The action service shouldn't learn $x_t$, except what can be inferred
     from the output of $f(x_t, c_a)$.
 \end{itemize}
+
+\kl{Simpler recipes:}
+Some recipes are even simpler. The client specifies:
+\begin{itemize}
+  \item a trigger service $t \in [T]$, a predicate $p \in \mathbf{P}_t$, and a
+    trigger constant $c_t \in \mathcal{C}$;
+  \item an action service $a \in [A]$, a transformation $f \in \mathbf{T}_a$,
+    and an action constant $c_a \in \mathcal{C}$.
+\end{itemize}
+When the trigger service $t$ receives trigger data $x_t \in \mathcal{X}$, the
+recipe executes as follows:
+\[
+  \text{if}~p(x_t, c_t) = 1\text{, then send}~f(c_a)~\text{to}~a.
+\]
+For simpler recipes, the predicate can execute entirely on the trigger service
+and the transformation can execute entirely on the action service. In this
+setting, we ask whether we can hide more information from the TAP, such as the
+rule semantics and the services involved.
+
+\kl{Is it a bad idea if trigger services communicate directly with action
+  services?}
+\begin{itemize}
+  \item Trigger services have access to and store OAuth tokens.
+  \item Each trigger service essentially has to run a TAP.
+\end{itemize}
+
+\kl{Otherwise, can a client install a rule and have it execute anonymously?}
+\begin{itemize}
+  \item Authenticated client can buy anonymous token to install a rule.
+  \item Client can anonymously install a rule by presenting anonymous
+    token. \kl{How to handle OAuth tokens? TODO: Figure out how they work.}
+\end{itemize}
