@@ -3,11 +3,10 @@ TAP-research
 
 Questions of the week:
 
-- do we use TCP/IP or add other protocols to our network?
-- develop further timeline?
-- i think i've downloaded the mpc library BUT not via docker (through wget), how do I check if I actually did download it?
+- Zapier can read gmail letters
+
+/later
 - docker image creation from github help?
-- learned to create mobile apps on android studio
 
 
 ------
