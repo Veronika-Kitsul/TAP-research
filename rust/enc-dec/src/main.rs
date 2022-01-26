@@ -1,6 +1,5 @@
 extern crate crypto;
-use crypto::aes;
+use aes;
 
 fn main() {
-    let key = aes::generic_array::GenericArray
 }
