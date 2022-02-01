@@ -1,24 +1,24 @@
 use std::net::TcpListener;
+use std::thread;
 
 fn main() {
 
-    
     let listener = TcpListener::bind("").unwrap();
-//do we need a thread pool?
-    //let pool = ThreadPool::new(4);
 
+    // Listen for connections on a loop
     for stream in listener.incoming() {
         let stream = stream.unwrap();
 
-        // pool.execute(|| {
-        //     handle_connection(stream);
-        // });
+        thread::spawn(move|| {
+            // decrypt a message with a key
+
+            // When it gets connection, decrypt message
+
+            // Unmarshall back to message struct
+
+            // Do something with the message
+        });
     }
-    // Listen for connections on a loop
 
-    // When it gets connection, decrypt message
-
-    // Unmarshall back to message struct
-
-    // Do something with the message
+    drop(listener);
 }
