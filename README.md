@@ -3,6 +3,16 @@ TAP-research
 
 Questions of the week:
 
+- #[derive(Serialize, Deserialize, Debug)]
+- make is not running
+- run files
+- security proofs
+- connect all languages
+- how to generate secure keys
+- 
+
+
+
 - Zapier can read gmail letters
 
 /later
