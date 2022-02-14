@@ -4,27 +4,33 @@
 The Internet of Things (IoT) devices are constantly increasing in their popularity with more than 10 billion
 active devices in 2021~\cite{DBLP:webpage/Bojan/IoTstats}. As people around the world start using IoT
 in the context of smart homes more and more, the ability to connect devices to other digital services is a
-very helpful automation technique that can do small and monotonous tasks for the user and saves a lot
-of time. To expand their network and support more services, IoT devices are oftentimes integrated 
-with third-party services called Trigger-action systems~\cite{DBLP:journals/access/XuZZCDG19,DBLP:conf/chi/UrHBLMPSL16}.
+very helpful automation technique that can do small and monotonous tasks for the user to save time. To 
+expand their network and support more services, IoT devices are oftentimes integrated with third-party
+services called Trigger-action systems~\cite{DBLP:journals/access/XuZZCDG19, DBLP:conf/chi/UrHBLMPSL16}.
 
-Trigger-action platforms (TAPs) comprise several parts:
-\emph{services}, \emph{platforms}, and \emph{applets}. A client can install an
-applet that connects two services together on a platform. For example, suppose
-the client wears a Fitbit to track their sleep duration. If the Fitbit records a
-sleep duration under some target duration, the platform adds a reminder to
-the client's Google Calendar to sleep more the next day. The platform connects
-the Fitbit and Google Calendar services together through the applet ``If sleep
-is under a target duration, then add a reminder to Google Calendar.'' \kl{This 
-example is from the Walnut paper~\cite{DBLP:journals/corr/abs-2009-12447}, but 
-we should come with another, more compelling example by analyzing more applets real people use.} 
+Trigger-action platforms (TAPs) comprise several parts: \emph{services}, \emph{platforms}, and
+\emph{applets}. A client can install an applet that connects two services together on a platform. For
+example, suppose the client wears a Fitbit to track their sleep duration. If the Fitbit records a sleep
+duration under some target duration, the platform adds a reminder to the client's Google Calendar to 
+sleep more the next day. The platform connects the Fitbit and Google Calendar services together 
+through the applet ``If sleep is under a target duration, then add a reminder to Google Calendar.'' \kl{This 
+example is from the Walnut paper~\cite{DBLP:journals/corr/abs-2009-12447}, but we should come with
+another, more compelling example by analyzing more applets real people use.} 
 
-One of the biggest such TAPs is IFTTT ("If This, Then That") that works with
-over 700 services and more than 20 million users around the world (ifttt website and ~\cite{DBLP:conf/spChenCWSCF21}.
+One of the first and biggest such TAPs is IFTTT ("If This, Then That") that works with
+over 700 services and more than 20 million users around the world ~\cite{ifttt-website, DBLP:conf/sp/ChenCWSCF21}. 
+Because IFTTT has an access to the vast number of devices and users' data, hacking it presents a
+bigger potential threat than if only one of your devices or digital services would be hacked. TAPs
+compute over sensitive data and run millions of actions on their users' behalf. Many scholars have been
+examining IFTTT-like services for years to point out their numerous security
+and privacy flaws and suggest better practices (~\cite{DBLP:conf/sp/ChenCWSCF21, DBLP:journals/corr/abs-2009-12447, DBLP:conf/imc/MiQZW17, DBLP:journals/corr/FernandesRJP17, DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}). 
+However, even if there are ways to be more secure, private companies would not employ them because 
+they \emph{would} like to know everything about you as a user.
+
 
 Today's TAPs learn much information about clients:
 \begin{itemize}[leftmargin=*]
-  \item the services (Fitbit and Google Calendar),
+  \item the services (both trigger and action, for example Fitbit and Google Calendar),
   \item the applet semantics (``If sleep is under a target duration, then add a
     reminder to Google Calendar.''),
   \item inputs to the applet (sleep duration), and
@@ -32,10 +38,9 @@ Today's TAPs learn much information about clients:
 \end{itemize}
 
 
-Privacy-preserving TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and
-Walnut~\cite{DBLP:journals/corr/abs-2009-12447}) propose using multi-party
-computation (MPC) to hide inputs to the applet from the TAP. However, prior work
-doesn't cover any of the abovementioned sources of leakage, which is a substantial fault. Ideally,
-the TAP should learn no information about the client (besides timing
-information). In this project, we ask if such a TAP design is possible, and if
+Privacy-preserving TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and 
+Walnut~\cite{DBLP:journals/corr/abs-2009-12447}) propose using multi-party computation (MPC) to hide
+inputs to the applet from the TAP. However, prior work doesn't cover any of the abovementioned 
+sources of leakage, which is a substantial fault. Ideally, the TAP should learn no information about the
+client (besides timing information). In this project, we ask if such a TAP design is possible, and if
 so, what are the costs. 

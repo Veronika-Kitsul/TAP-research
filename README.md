@@ -4,26 +4,26 @@ TAP-research
 Questions of the week:
 
 - diagram flow need to start doing now
+- name suggestions "IFTTT Alternative: Trigger-Action Platform based on Multi-Party Computation Garbled Circuits and ___"
+- TAP name suggestions
 - security proofs
 - finish design and write up the paper up to that point
+- how about "Post new emails received in Gmail to Facebook Page"  as our lead expample? it's a real applet from Zapier for Business Gmail Accounts
 
+---------
 - Zapier can read gmail letters
 
-/later
-- docker image creation from github help?
-
-
 ------
+
 IFTTT:
 - Wifi password from google assistant https://ifttt.com/applets/EQ6xwrTD-wifi-password?term=password
-- For new account notifications sent to your email. Toodledo will store basic information. Then later add login and password to Toodledo, or your password manager https://ifttt.com/applets/HnDGSTkE-new-accounts?term=password
 - Create a customizable form to collect details from paid members into Google Sheets. On a successful enable, a shareable URL to a custom form will be sent to your IFTTT email address. Only members of your channel can use the custom form. If enabled, an email will be sent when a member submits the form to you. https://ifttt.com/connections/DsztxHNf-collect-paid-member-details?term=address
 - If someone calls, start maps and show his location, https://ifttt.com/applets/hJMKghVa-if-someone-calls-start-maps-and-show-his-location?term=location
 ---------
 
 Background section plan
 - TAP
-- talk about different TAPs, like IFTTT, Zappier, etc.
+- talk about different TAPs, like IFTTT, Zappier, etc. - market analysis
 - write about MPC and garbled circuits
 - do we write anything about semi-honest security in the background or design, or do we not talk about it explicitly?
 ----------
