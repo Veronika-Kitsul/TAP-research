@@ -4,6 +4,7 @@ TAP-research
 Questions of the week:
 
 - diagram flow need to start doing now
+- Decoupling... paper talks about OAuth tokens that IFTTT uses and probably criticize them
 - name suggestions "IFTTT Alternative: Trigger-Action Platform based on Multi-Party Computation Garbled Circuits and ___"
 - TAP name suggestions
 - security proofs
