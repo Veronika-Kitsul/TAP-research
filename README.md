@@ -3,15 +3,9 @@ TAP-research
 
 Questions of the week:
 
-- #[derive(Serialize, Deserialize, Debug)]
-- make is not running
-- run files
+- diagram flow need to start doing now
 - security proofs
-- connect all languages
-- how to generate secure keys
-- 
-
-
+- finish design and write up the paper up to that point
 
 - Zapier can read gmail letters
 
