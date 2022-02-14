@@ -10,8 +10,9 @@ criterion = "0.3.5"
 serde = "1.0"
 serde_derive = "1.0.136"
 bincode = "1.2.1"
-openssl = "0.10.28"
 serde-encrypt = "0.6.0"
+hpke = "0.8.0"
+rand = "0.8.4"
 
 [[bench]]
 name = "benchmarks"
