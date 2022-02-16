@@ -1,4 +1,4 @@
-use std::io::Write;
+use std::io::{Read, Write};
 use std::net::TcpStream;
 use example::format::{Message,MessageType};
 use bincode;
@@ -73,10 +73,23 @@ fn main() {
 
             // Send ciphertext to the server
             stream.write(&ciphertext).unwrap();
+
+            println!("Awaiting reply");
+
+            let mut data = [0 as u8; 2000];
+            match stream.read_exact(&mut data) {
+                Ok(data) => {
+                    println!("{}", data)
+                }
+                Err(e) => {
+                    println!("Failed to receive data: {}", e);
+                }
+            }
         }
         
         Err(e) => {
-            println!("There was an error.");
+            println!("Failed to connect: {}", e);
         }
     }
+    println!("Terminated.");
 }
