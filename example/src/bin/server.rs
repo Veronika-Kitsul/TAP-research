@@ -16,12 +16,15 @@ fn decrypt_msg(
     tag_bytes: &[u8],
 ) -> Vec<u8>
 {
-    let server_sk = <Kem as KemTrait>::PrivateKey::from_bytes(server_sk_bytes).expect("could not deserealize server privkey");
+    let server_sk = <Kem as KemTrait>::PrivateKey::from_bytes(server_sk_bytes).
+                    expect("could not deserealize server privkey");
     let tag = AeadTag::<Aead>::from_bytes(tag_bytes).expect("could not deserialize AEAD tag");
-    let encapped_key = <Kem as KemTrait>::EncappedKey::from_bytes(encapped_key_bytes).expect("could not deserialize the encapsulated pubkey");
+    let encapped_key = <Kem as KemTrait>::EncappedKey::from_bytes(encapped_key_bytes).
+                    expect("could not deserialize the encapsulated pubkey");
 
     // decapsulate and derive the shared secret to create AEAD context
-    let mut receiver_ctx = hpke::setup_receiver::<Aead, Kdf, Kem>(&OpModeR::Base, &server_sk, &encapped_key, INFO_STR).expect("failed to set up receiver!");
+    let mut receiver_ctx = hpke::setup_receiver::<Aead, Kdf, Kem>
+                (&OpModeR::Base, &server_sk, &encapped_key, INFO_STR).expect("failed to set up receiver!");
 
     let mut plaintext = ciphertext.to_vec();
     receiver_ctx.open_in_place_detached(&mut plaintext, aad, &tag).expect("invalid ciphertext");

@@ -79,7 +79,7 @@ fn main() {
             let mut data = [0 as u8; 2000];
             match stream.read_exact(&mut data) {
                 Ok(data) => {
-                    println!("{}", data)
+                    println!("{:?}", data)
                 }
                 Err(e) => {
                     println!("Failed to receive data: {}", e);
