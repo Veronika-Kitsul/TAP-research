@@ -5,10 +5,18 @@
 
 Trigger-action systems have three main components: trigger service (TS), action service (AS), and
 trigger-action platform (TAP). Users interact with it through their computer connected to the cloud or
-smartphone **(that can be offline? need to see how ifttt does it)**~\cite{DBLP:conf/sp/ChenCWSCF21}.
+smartphone~\cite{DBLP:conf/sp/ChenCWSCF21}. Clients configure the system by specifying triggers ("if
+my Fitbit sends a sleep data") and actions ("create a Google Calendar reminder to sleep more"). 
 
-(ifttt website and ~\cite{DBLP:conf/spChenCWSCF21}. Clients configure the system by specifying triggers ("if my Fitbit sends a sleep data")
-and actions ("create a Google Calendar reminder to sleep more"). 
+TAPs do not require their users to have any technical skills to build complicated automated functions for
+their everyday use, which is one of the reasons for their popularity. In addition, they can find hundreds of
+ready-made applets for their usage by simply typing the services they want to integrate. The templates
+are published by both the developers to ease people's lives and by the users themselves, who would like
+to share their applets with community. Those are not known to be regulated in any way. 
+
+Some recipes, however, are potentially risky. Surbatovich et al. describes a potential case, in which an applet of a type "open the window if the temperature is above a threshold" could enable attackers to affect the temperature to open the windows, when nobody is in the house. 
+
+add a citation to websites of community applets on different platforms
 
 \subsection{Market Analysis}
 Today's market of trigger-action platforms is fairly extensive and includes many alternatives to IFTTT.
@@ -28,7 +36,7 @@ et al. writes that "they can send and save SMS messages, check the incoming clas
 information about the caller, save the numbers you call, automate actions based on phone location,
 record motion of the phone, track locations, get notifications when employees connect or disconnect to
 the Wi-Fi, turn off Wi-Fi automatically, backup photos, send/upload contacts from/to your phone"
-~\cite{DBLP:conf/icict2/AbdouEF21}. Zapier also integrates with 2000+ appications as major technology
+~\cite{DBLP:conf/icict2/AbdouEF21}. Zapier also integrates with 2000+ applications as major technology
 companies are interested in partnering with it. 
 % why????
 
@@ -38,7 +46,6 @@ may expose users to physical or verbal threats. Sometimes, mistake on users beha
 unexpected behaviour that would leak sensitive information. Therefore, this paper is trying to minimize
 the amount of data TAP has an access to so that when its security is compromised, attackers can gain as
 little data as possible.
-
 
 \subsection{Cryptography Behind the Design}
 
@@ -51,8 +58,8 @@ may confirm the result of the function they agreed on computing. Since its inven
 all kinds of applications ~\cite{DBLP:journals/ftsec/EvansKR18}. 
 
 None of the parties trusts each other nor do they trust any third party. We use the two-party scenario
-(also called 2PC) and set it up between user---TAP and TAP---action-platform. MPC assumes direct
-secure channels between each pair and denotes encryption and decryption of a message $m$ under key
+(also called 2PC) and set it up between user---TAP. MPC assumes direct secure channels between each
+pair and denotes encryption and decryption of a message $m$ under key
 $\kappa$ as $\mathsf{Enc}_\kappa(m)$ and $\mathsf{Dec}_\kappa(m)$ with the goal to learn the correct
 output of a mutual function without revealing private inputs. 
 
@@ -72,14 +79,13 @@ distributions under real-ideal paradigm
 are indistinguishable in $\kappa$.
 
 
-
 \subsubsection{Garbled Circuits}
 
 The first Garbled Circuits Protocol was introduced by Yao a few years after his first publication on MPC. It
 remains the basis for some of the most efficient MPC implementations. Yao's Garbled Circuits operate on
 the idea that there is a function $F(x,y)$, party $P_1$ holds $x \in X$, and party $P_2$ holds $y \in Y$.
 Yao's Garbled Circuits Protocol (GC) is the most widely known MPC technique that is also best
-performing. It doesn't associated with communication complexity but runs in constant rounds and avoids
+performing. It is not associated with communication complexity but runs in constant rounds and avoids
 costly latency. 
 
 
