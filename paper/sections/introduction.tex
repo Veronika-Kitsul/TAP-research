@@ -9,23 +9,23 @@ expand their network and support more services, IoT devices are oftentimes integ
 services called Trigger-action systems~\cite{DBLP:journals/access/XuZZCDG19, DBLP:conf/chi/UrHBLMPSL16}.
 
 Trigger-action platforms (TAPs) comprise several parts: \emph{services}, \emph{platforms}, and
-\emph{applets}. A client can install an applet that connects two services together on a platform. For
+\emph{recipes}. A client can install a recipe that connects two services together on a platform. For
 example, suppose the client wears a Fitbit to track their sleep duration. If the Fitbit records a sleep
 duration under some target duration, the platform adds a reminder to the client's Google Calendar to 
 sleep more the next day. The platform connects the Fitbit and Google Calendar services together 
-through the applet ``If sleep is under a target duration, then add a reminder to
+through the recipe ``If sleep is under a target duration, then add a reminder to
 Google Calendar.''
 %\kl{This 
 %example is from the Walnut paper~\cite{DBLP:journals/corr/abs-2009-12447}, but we should come with
 %another, more compelling example by analyzing more applets real people use.} 
 
 One of the first and biggest such TAPs is IFTTT ("If This, Then That") that works with
-over 700 services and more than 20 million users around the world ~\cite{ifttt-website, DBLP:conf/sp/ChenCWSCF21}. 
+over 700 services and more than 20 million users around the world~\cite{ifttt-website, DBLP:conf/sp/ChenCWSCF21}. 
 Because IFTTT has an access to the vast number of devices and users' data, hacking it presents a
 bigger potential threat than if only one of your devices or digital services would be hacked. TAPs
 compute over sensitive data and run millions of actions on their users' behalf. Many scholars have been
 examining IFTTT-like services for years to point out their numerous security
-and privacy flaws and suggest better practices (~\cite{DBLP:conf/sp/ChenCWSCF21, DBLP:journals/corr/abs-2009-12447, DBLP:conf/imc/MiQZW17, DBLP:journals/corr/FernandesRJP17, DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}). 
+and privacy flaws and suggest better practices~\cite{DBLP:conf/sp/ChenCWSCF21, DBLP:journals/corr/abs-2009-12447, DBLP:conf/imc/MiQZW17, DBLP:journals/corr/FernandesRJP17, DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}. 
 However, even if there are ways to be more secure, private companies would not employ them because 
 they \emph{would} like to know everything about you as a user.
 
@@ -33,7 +33,7 @@ they \emph{would} like to know everything about you as a user.
 Today's TAPs learn much information about clients:
 \begin{itemize}[leftmargin=*]
   \item the services (both trigger and action, for example Fitbit and Google Calendar),
-  \item the applet semantics (``If sleep is under a target duration, then add a
+  \item the recipe semantics (``If sleep is under a target duration, then add a
     reminder to Google Calendar.''),
   \item inputs to the applet (sleep duration), and
   \item outputs to the action service (the reminder).
@@ -42,7 +42,7 @@ Today's TAPs learn much information about clients:
 
 Privacy-preserving TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and 
 Walnut~\cite{DBLP:journals/corr/abs-2009-12447}) propose using multi-party computation (MPC) to hide
-inputs to the applet from the TAP. However, prior work doesn't cover any of the abovementioned 
+inputs to the applet from the TAP. However, prior work doesn't cover all of the abovementioned 
 sources of leakage, which is a substantial fault. Ideally, the TAP should learn no information about the
 client (besides timing information). In this project, we ask if such a TAP design is possible, and if
 so, what are the costs. 
