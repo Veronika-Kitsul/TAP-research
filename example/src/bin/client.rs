@@ -17,6 +17,7 @@ type Kdf = HkdfSha384;
 const INFO_STR: &[u8] = b"example session";
 
 // initialize the server with a key pair
+// can write it in a file serialized and then send to server adn the client and deserialize it
 fn server_init() -> (<Kem as KemTrait>::PrivateKey, <Kem as KemTrait>::PublicKey) {
     let mut csprng = StdRng::from_entropy();
     Kem::gen_keypair(&mut csprng)
@@ -72,6 +73,9 @@ fn main() {
             println!("Connected to the server!");
 
             // Send ciphertext to the server
+            //create a sturct with all needed fields, serialie, send it over
+            //deserialize on the server part, decrypt
+
             stream.write(&ciphertext).unwrap();
 
             println!("Awaiting reply");
