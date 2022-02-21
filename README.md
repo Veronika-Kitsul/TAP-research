@@ -50,6 +50,13 @@ Earlence Fernandes and Amir Rahmati et al. [17] quantify the risk users face in 
 - In addition, digital automation platforms provide their RESTful APIs for integration with other application. They protect the communication through RESTful APIs using OAuth authorization workflow [23]. In [24] Z. Berkay Celik et al. provided IOTGUARD which detects when an application or interactions among applications lead to unsafe and insecure states and block these undesired states.
 - paper 23: E. Fernandes, A. Rahmati, J. Jung, and A. Prakash, “Decentralized action integrity for trigger-action iot platforms,” in Proceedings 2018 Network and Distributed System Security Symposium, 2018.
 - paper 24: Z. B. Celik, G. Tan, and P. D. McDaniel, “Iotguard: Dynamic enforce- ment of security and safety policy in commodity iot.” in NDSS, 2019.
+
+- papers that talk about unexpected behaviour with security risks:
+ [20] C. Nandi and M. D. Ernst, “Automatic trigger generation for rule- based smart homes,” in Proceedings of the 2016 ACM Workshop on Programming Languages and Analysis for Security, 2016, pp. 97–102.
+[21] M. Surbatovich, J. Aljuraidan, L. Bauer, A. Das, and L. Jia, “Some recipes can do more than spoil your appetite: Analyzing the security and privacy risks of ifttt recipes,” in Proceedings of the 26th International Conference on World Wide Web, 2017, pp. 1501–1510.
+[22] J.-b. Woo and Y.-k. Lim, “User experience in do-it-yourself-style smart homes,” in Proceedings of the 2015 ACM international joint conference on pervasive and ubiquitous computing, 2015, pp. 779–790.
+
+- Zapier is more secure according to https://www.luhhu.com/blog/is-zapier-safe-for-businesses and https://myintelligenthouse.com/is-it-safe-to-use-ifttt-security-concerns-when-using-ifttt/
 ----------
   Week 2 (of Mon Nov 29)
   - Design details:
