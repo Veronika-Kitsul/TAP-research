@@ -1,6 +1,8 @@
 \section{Overview and goals}
 \label{sec:problem}
 
+\kl{TODO: Notation.}
+
 In a trigger-action system, there is a client, $T$ trigger services, $A$ action
 services, and a trigger-action platform (TAP). Each trigger service $t \in [T]$
 exposes a set of predicates $\mathbf{P}_t$ that activate the trigger service. A
@@ -12,7 +14,7 @@ $\mathbf{T}_a$ that activate the action service. Each transformation $f :
 $x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$, and outputs an action
 $y \in \mathcal{Y}$.
 
-To set up the basic recipe with the TAP, the client specifies:
+To set up a basic recipe with the TAP, the client specifies:
 \begin{itemize}
   \item a trigger service $t \in [T]$, a predicate $p \in \mathbf{P}_t$, and a
     trigger constant $c_t \in \mathcal{C}$;
@@ -26,7 +28,7 @@ recipe executes as follows:
 \]
 
 In today's TAPs, such as IFTTT, both trigger data and user constants are
-supplied to the TAP in the clear, which executes the recipe. This leaks all
+supplied to the TAP in the clear, which then executes the recipe. This leaks all
 information, including the results of the computation.
 
 In \textsf{eTAP}~\cite{DBLP:conf/sp/ChenCWSCF21}, recipes are executed using MPC
@@ -55,51 +57,58 @@ cost and complexity. Our two key observations are the following:
     clear, so hiding the trigger keyword does not buy much (but certainly
     \emph{some}) in the way of privacy.
 \end{itemize}
-Given these observations, in our TAP design, we push the computation of the
+Given these observations, in our design of \sys, we push the computation of the
 predicate $p(x_t, c_t)$ to the trigger service---$p$ is not arbitrary
 client-supplied code and $x_t$ and $c_t$ need not be hidden from the trigger
-service. \kl{The computation of $p$ is also probably cheaper than encoding
-  inputs for MPC. Also computing $p$ in MPC can be quite expensive (e.g., due to
-  substring operations).}
+service. This saves us from having to run $p(x_t, c_t)$ in MPC, which can be
+expensive (e.g., due to substring operations).
 
 The computation of the transformation $f(x_t, c_a)$, however, mixes data from
 the trigger service ($x_t$) and data intended for the action service ($c_a$), so
-this is executed using MPC on the TAP. To summarize the privacy properties we
-are after:
+this is executed using MPC on the TAP. To summarize the basic privacy properties
+we are after:
 \begin{itemize}
-  \item The TAP shouldn't learn $x_t, c_t, c_a$ or the results of $f(x_t, c_a)$.
-  \item The action service shouldn't learn $x_t$, except what can be inferred
-    from the output of $f(x_t, c_a)$.
+  \item \textbf{TAP privacy.} The TAP shouldn't learn $x_t$, $c_t$, $c_a$ or the
+    results of $f(x_t, c_a)$.
+  \item \textbf{Action service privacy.} The action service shouldn't learn
+    $x_t$, except what can be inferred from the output of $f(x_t, c_a)$.
+\end{itemize}
+Even so, the TAP learns which trigger and action services a client interacts
+with and the semantics of the rules clients install can leak a lot of
+information. Thus, we also strive for the following anonymity property:
+\begin{itemize}
+  \item \textbf{TAP anonymity.} The TAP cannot link installed rules to a
+    particular client.
 \end{itemize}
 
-\kl{Simpler recipes:}
-Some recipes are even simpler. The client specifies:
-\begin{itemize}
-  \item a trigger service $t \in [T]$, a predicate $p \in \mathbf{P}_t$, and a
-    trigger constant $c_t \in \mathcal{C}$;
-  \item an action service $a \in [A]$, a transformation $f \in \mathbf{T}_a$,
-    and an action constant $c_a \in \mathcal{C}$.
-\end{itemize}
-When the trigger service $t$ receives trigger data $x_t \in \mathcal{X}$, the
-recipe executes as follows:
-\[
-  \text{if}~p(x_t, c_t) = 1\text{, then send}~f(c_a)~\text{to}~a.
-\]
-For simpler recipes, the predicate can execute entirely on the trigger service
-and the transformation can execute entirely on the action service. In this
-setting, we ask whether we can hide more information from the TAP, such as the
-rule semantics and the services involved.
-
-\kl{Is it a bad idea if trigger services communicate directly with action
-  services?}
-\begin{itemize}
-  \item Trigger services have access to and store OAuth tokens.
-  \item Each trigger service essentially has to run a TAP.
-\end{itemize}
-
-\kl{Otherwise, can a client install a rule and have it execute anonymously?}
-\begin{itemize}
-  \item Authenticated client can buy anonymous token to install a rule.
-  \item Client can anonymously install a rule by presenting anonymous
-    token. \kl{How to handle OAuth tokens? TODO: Figure out how they work.}
-\end{itemize}
+%\kl{Simpler recipes:}
+%Some recipes are even simpler. The client specifies:
+%\begin{itemize}
+%  \item a trigger service $t \in [T]$, a predicate $p \in \mathbf{P}_t$, and a
+%    trigger constant $c_t \in \mathcal{C}$;
+%  \item an action service $a \in [A]$, a transformation $f \in \mathbf{T}_a$,
+%    and an action constant $c_a \in \mathcal{C}$.
+%\end{itemize}
+%When the trigger service $t$ receives trigger data $x_t \in \mathcal{X}$, the
+%recipe executes as follows:
+%\[
+%  \text{if}~p(x_t, c_t) = 1\text{, then send}~f(c_a)~\text{to}~a.
+%\]
+%For simpler recipes, the predicate can execute entirely on the trigger service
+%and the transformation can execute entirely on the action service. In this
+%setting, we ask whether we can hide more information from the TAP, such as the
+%rule semantics and the services involved.
+%
+%\kl{Is it a bad idea if trigger services communicate directly with action
+%  services?}
+%\begin{itemize}
+%  \item Trigger services have access to and store OAuth tokens.
+%  \item Each trigger service essentially has to run a TAP.
+%\end{itemize}
+%
+%\kl{Otherwise, can a client install a rule and have it execute anonymously?}
+%\begin{itemize}
+%  \item Authenticated client can buy anonymous token to install a rule.
+%  \item Client can anonymously install a rule by presenting anonymous
+%    token. \kl{How to handle OAuth tokens? TODO: Figure out how they work.}
+%\end{itemize}
