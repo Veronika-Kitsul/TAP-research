@@ -2,15 +2,24 @@ TAP-research
 ------------
 
 Questions of the week:
-
-- Decoupled-IFTTT... paper talks about OAuth tokens that IFTTT uses and probably criticizes overprivileged possibilities they have in ifttt, introduce transfer token (XToken) and combine with recipe-specific tokens
 - diagram flow need to start doing now
-- name suggestions "IFTTT Alternative: Trigger-Action Platform based on Multi-Party Computation Garbled Circuits and ___"
-- TAP name suggestions
 - security proofs
 - finish design and write up the paper up to that point
 - how about "Post new emails received in Gmail to Facebook Page"  as our lead expample? it's a real applet from Zapier for Business Gmail Accounts
-- monday meeting?
+
+- Identified specific need or problem
+
+- Development of clear performance criteria
+
+- Sufficient preliminary designs
+
+- Well Constructed and tested prototype
+
+- Statistically analyzed and documented results
+
+- Retesting and redesign
+
+- Consideration of feasibility
 
 ---------
 - Zapier can read gmail letters
@@ -38,12 +47,6 @@ Notes to Veronika (myself):
 maybe google will be comfortable with their emails on IFTTT using this new design
 
 ----------
-**Preliminary Timeline starting week of 11/18/2021:**
-
-  Week 1 (of Mon Nov 22)
-  - Background finish what I can
-  - High-level design overview
-
   Week 2 (of Mon Nov 29)
   - Design details:
     * required crypto protocols
