@@ -66,8 +66,10 @@ the trigger service ($x_t$) and data intended for the action service ($c_a$), so
 this is executed using MPC on the TAP. To summarize the basic privacy properties
 we are after:
 \begin{itemize}
-  \item \textbf{TAP privacy.} The TAP shouldn't learn $x_t$, $c_t$, $c_a$ or the
-    results of $f(x_t, c_a)$.
+%  \item \textbf{Correctness.} The TAP shouldn't learn $x_t$, $c_t$, $c_a$ or the
+%    results of $f(x_t, c_a)$.  
+  \item \textbf{TAP privacy.} The TAP should not learn $x_t$, $c_t$, $c_a$ or
+    the results of $f(x_t, c_a)$.
   \item \textbf{Action service privacy.} The action service shouldn't learn
     $x_t$, except what can be inferred from the output of $f(x_t, c_a)$.
 \end{itemize}
