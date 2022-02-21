@@ -1,18 +1,16 @@
 \section{Overview and goals}
 \label{sec:problem}
 
-\kl{TODO: Notation.}
-
 In a trigger-action system, there is a client, $T$ trigger services, $A$ action
-services, and a trigger-action platform (TAP). Each trigger service $t \in [T]$
-exposes a set of predicates $\mathbf{P}_t$ that activate the trigger service. A
-predicate $p : \mathcal{X} \times \mathcal{C} \to \{0,1\}$ takes as input
-trigger data $x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$, and
-outputs a bit. Each action service $a \in [A]$ exposes a set of transformations
-$\mathbf{T}_a$ that activate the action service. Each transformation $f :
-\mathcal{X} \times \mathcal{C} \to \mathcal{Y}$ also takes as input trigger data
-$x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$, and outputs an action
-$y \in \mathcal{Y}$.
+services, and a trigger-action platform (TAP). Each trigger service $t \in [T] =
+\{1, \ldots, T\}$ exposes a set of predicates $\mathbf{P}_t$ that activate the
+trigger service. A predicate $p : \mathcal{X} \times \mathcal{C} \to \{0,1\}$
+takes as input trigger data $x \in \mathcal{X}$ and user constant $c \in
+\mathcal{C}$, and outputs a bit. Each action service $a \in [A]$ exposes a set
+of transformations $\mathbf{T}_a$ that activate the action service. Each
+transformation $f : \mathcal{X} \times \mathcal{C} \to \mathcal{Y}$ also takes
+as input trigger data $x \in \mathcal{X}$ and user constant $c \in \mathcal{C}$,
+and outputs an action $y \in \mathcal{Y}$.
 
 To set up a basic recipe with the TAP, the client specifies:
 \begin{itemize}
@@ -74,8 +72,8 @@ we are after:
     $x_t$, except what can be inferred from the output of $f(x_t, c_a)$.
 \end{itemize}
 Even so, the TAP learns which trigger and action services a client interacts
-with and the semantics of the rules clients install can leak a lot of
-information. Thus, we also strive for the following anonymity property:
+with and semantics of the rules installed by clients, which still leaks a lot of
+information.  Thus, we also require an additional anonymity property:
 \begin{itemize}
   \item \textbf{TAP anonymity.} The TAP cannot link installed rules to a
     particular client.
