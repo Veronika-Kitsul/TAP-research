@@ -40,12 +40,16 @@ Background section plan
 ----------
 
 Notes to Veronika (myself):
-- fix bibtex for two articles I am planning to add and make sure that citation key is different for them
-- https://ifttt.com/plans. --- cite it for ifttt services
 - oauth tokens and API
-
 maybe google will be comfortable with their emails on IFTTT using this new design
+-------
+On Abdou et al. Digital automation:
+- use decoupled ifttt paper fot 
+Earlence Fernandes and Amir Rahmati et al. [17] quantify the risk users face in the context of IFTTT that inter- faces with more than 297 online services and provides over 200,000 recipes. They perform the first empirical analysis of the OAuth-based authorization model of IFTTT using semi- automated tools that they built to overcome the challenges of IFTTT’s closed source nature and of online service 
 
+- In addition, digital automation platforms provide their RESTful APIs for integration with other application. They protect the communication through RESTful APIs using OAuth authorization workflow [23]. In [24] Z. Berkay Celik et al. provided IOTGUARD which detects when an application or interactions among applications lead to unsafe and insecure states and block these undesired states.
+- paper 23: E. Fernandes, A. Rahmati, J. Jung, and A. Prakash, “Decentralized action integrity for trigger-action iot platforms,” in Proceedings 2018 Network and Distributed System Security Symposium, 2018.
+- paper 24: Z. B. Celik, G. Tan, and P. D. McDaniel, “Iotguard: Dynamic enforce- ment of security and safety policy in commodity iot.” in NDSS, 2019.
 ----------
   Week 2 (of Mon Nov 29)
   - Design details:
