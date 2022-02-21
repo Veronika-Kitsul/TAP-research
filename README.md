@@ -55,6 +55,8 @@ Earlence Fernandes and Amir Rahmati et al. [17] quantify the risk users face in 
  [20] C. Nandi and M. D. Ernst, “Automatic trigger generation for rule- based smart homes,” in Proceedings of the 2016 ACM Workshop on Programming Languages and Analysis for Security, 2016, pp. 97–102.
 [21] M. Surbatovich, J. Aljuraidan, L. Bauer, A. Das, and L. Jia, “Some recipes can do more than spoil your appetite: Analyzing the security and privacy risks of ifttt recipes,” in Proceedings of the 26th International Conference on World Wide Web, 2017, pp. 1501–1510.
 [22] J.-b. Woo and Y.-k. Lim, “User experience in do-it-yourself-style smart homes,” in Proceedings of the 2015 ACM international joint conference on pervasive and ubiquitous computing, 2015, pp. 779–790.
+
+- Zapier is more secure according to https://www.luhhu.com/blog/is-zapier-safe-for-businesses and https://myintelligenthouse.com/is-it-safe-to-use-ifttt-security-concerns-when-using-ifttt/
 ----------
   Week 2 (of Mon Nov 29)
   - Design details:

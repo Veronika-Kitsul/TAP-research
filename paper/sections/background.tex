@@ -35,9 +35,9 @@ companies are interested in partnering with it.
 All platforms, however, have one thing in common---security vulnerability. By attacking only one digital
 automation platform, hackers may extract information from all integrated applications and devices that
 may expose users to physical or verbal threats. Sometimes, mistake on users behalf may lead to
-unexpected behaviour that would leak sensitive information. 
-
-
+unexpected behaviour that would leak sensitive information. Therefore, this paper is trying to minimize
+the amount of data TAP has an access to so that when its security is compromised, attackers can gain as
+little data as possible.
 
 
 \subsection{Cryptography Behind the Design}
@@ -48,7 +48,7 @@ Secure multi-party computation (MPC) enables a computation within a group of dev
 any participant's private information. MPC allows verifiable computation, meaning the participants then
 may confirm the result of the function they agreed on computing. Since its invention by Andrew Yao in
 1982, the topic has attracted many researchers and evolved from theory to an important practical tool for
-all kinds of applications. [the book]
+all kinds of applications ~\cite{DBLP:journals/ftsec/EvansKR18}.
 
 
 \subsubsection{Garbled Circuits}
