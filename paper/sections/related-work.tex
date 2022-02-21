@@ -2,6 +2,18 @@
 \label{sec:related}
 
 \paragraph{TAP security \& privacy.}
+The $\mathsf{eTAP}$ system~\cite{DBLP:conf/sp/ChenCWSCF21} also aims to provide
+privacy for trigger-action platforms. We follow their approach of executing
+recipes using MPC, but find ways to reduce the amount of MPC required by
+half. Moreover, we also develop techniques to unlink the installed recipes from
+client identities.
+
+Walnut~\cite{DBLP:journals/corr/abs-2009-12447} is another system that aims to
+provide privacy for trigger-action platforms using MPC, but using two
+non-colluding servers instead of one. They also do not consider how to unlink
+installed recipes from client identities.
+
+\kl{Other papers:}
 Privacy in trigger-action systems~\cite{DBLP:conf/sp/ChenCWSCF21}, analysis of
 IFTTT
 recipes~\cite{DBLP:conf/chi/UrHBLMPSL16,DBLP:conf/www/SurbatovichABDJ17, DBLP:conf/imc/MiQZW17},
