@@ -63,7 +63,7 @@ pair and denotes encryption and decryption of a message $m$ under key
 $\kappa$ as $\mathsf{Enc}_\kappa(m)$ and $\mathsf{Dec}_\kappa(m)$ with the goal to learn the correct
 output of a mutual function without revealing private inputs. 
 
-Our MPC will also use Semi-Honest adversary model. Semi-Honest model corrupts parties but follows
+Our MPC will also use semi-honest adversary model. Semi-honest model corrupts parties but follows
 the protocol. However, the corrupt parties may try to learn as much as possible from the messages they
 receive. They cannot take any actions other than observe protocol execution, so they are also called
 \emph{honest-but-curious}. 
@@ -75,16 +75,15 @@ distributions under real-ideal paradigm
   \mathsf{Real}_{\pi}(\kappa, C, x_1, ..., x_n) \\
   \mathsf{Ideal}_{\phi, \mathsf{Sim}} (\kappa, C, x_1, ..., x_n)
 \end{gather*} 
-
 are indistinguishable in $\kappa$.
 
 
 \subsubsection{Garbled Circuits}
 
-The first Garbled Circuits Protocol was introduced by Yao a few years after his first publication on MPC. It
+The first garbled circuits protocol was introduced by Yao a few years after his first publication on MPC. It
 remains the basis for some of the most efficient MPC implementations. Yao's Garbled Circuits operate on
 the idea that there is a function $F(x,y)$, party $P_1$ holds $x \in X$, and party $P_2$ holds $y \in Y$.
-Yao's Garbled Circuits Protocol (GC) is the most widely known MPC technique that is also best
+Yao's garbled circuits protocol (GC) is the most widely known MPC technique that is also best
 performing. It is not associated with communication complexity but runs in constant rounds and avoids
 costly latency. 
 
