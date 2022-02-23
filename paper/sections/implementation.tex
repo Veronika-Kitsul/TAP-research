@@ -1,4 +1,13 @@
 \section{Implementation}
 \label{sec:implementation}
 
-We implement a prototype of \sys in Rust.
+We implement a prototype of \sys in Rust. Chen et al. \cite{DBLP:conf/sp/ChenCWSCF21} in their work use Python, however, we provide some reasons why we think Rust is better here: 
+\begin{itemize}
+	\item very fast and memory efficient (about on the same speed level as C);
+	\item powerful features for combining many functions and libraries;
+	\item extensive support system and vast amount of available crates;
+	\item ensures high safety, the compiler pings every possible bug (prevention of references to freed memory, concurrent memory access, etc.);
+	\item gives the ability to claim ownership of specific pieces of data, nothing else will be able to modify it;
+	\item efficient succinct code;
+	\item number one choice among many computer science researchers.
+\end{itemize}
