@@ -1,11 +1,17 @@
 \section{Design}
 \label{sec:design}
 
+
 In this section, we first describe a basic protocol that achieves TAP privacy
 and action service privacy, and then describe an extension that achieves TAP
 anonymity.
 
 \subsection{The basic protocol}
+
+\begin{figure}
+\includegraphics[width=8cm]{/Users/veronikakitsul/Desktop/TAP-research/graphics/ACACIA.png}
+\caption{Basic protocol scheme. (1) - (2) (3) (4) (5) (6) (7) (8)}
+\end{figure}
 
 \paragraph{Setup.}
 Each trigger service $t \in [T]$ has a key pair $(\skt_t, \pkt_t)$ and each
@@ -49,6 +55,11 @@ action service $a$ decrypts to recover the action data, and then performs its
 action.
 
 \subsection{Anonymity extension}
+
+\begin{figure}
+\includegraphics[height=8cm]{/Users/veronikakitsul/Desktop/TAP-research/graphics/Proxy1.png}
+\caption{Basic protocol scheme. (1) - (2) (3) (4) (5) (6) (7) (8)}
+\end{figure}
 
 \paragraph{Anonymous recipe installation.} In order to achieve TAP anonymity,
 clients first need a way to install recipes anonymously. The main cryptographic
