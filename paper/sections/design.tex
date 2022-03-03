@@ -10,7 +10,10 @@ anonymity.
 
 \begin{figure}
 \includegraphics[width=8cm]{graphics/ACACIA.png}
-\caption{Basic protocol scheme. (1) - (2) (3) (4) (5) (6) (7) (8)}
+\caption{\textbf{Basic protocol recipe installation scheme.} (1) - recipe installation; (2) - send encrypted
+recipe information; (3) - generate and send garbled circuits; (4) - get trigger data $x_t$ and execute 
+$P(x_t, c_t)$; (5) - garbled inputs for $f(x_t, c_t$; (6) - execute $f(x_t, c_a)$; (7) - send $y$; (8) - decrypt
+$y$ to get action data.}
 \end{figure}
 
 \paragraph{Setup.}
@@ -29,13 +32,6 @@ trusted mobile client:
 The mobile client encrypts and sends the predicate $p$ and trigger constant
 $c_t$ to the trigger service $t$ using its public key $\pkt_t$. The trigger
 service can decrypt this information using its secret key $\skt_t$.
-
-%\begin{enumerate}
-%  \item The client sends the following to the TAP: $(t, p, \ct_t)$ and $(a, f)$,
-%    where $\ct_t = \enc(\skt_t, c_t)$.
-%  \item The TAP forwards $(p, \ct_t)$ to $t$ and negotiates the necessary OAuth
-%    tokens with $a$ for running the recipe.
-%\end{enumerate}
 
 \paragraph{Garbled circuit generation.}
 Since the trusted mobile client cannot send the action constant $c_a$ to the TAP
@@ -58,7 +54,7 @@ action.
 
 \begin{figure}
 \includegraphics[height=8cm]{graphics/Proxy1.png}
-\caption{Basic protocol scheme. (1) - (2) (3) (4) (5) (6) (7) (8)}
+\caption{\textbf{Anonymous recipe installation protocol scheme.} (1) - Get anonymous tokens; (2) - send recipe installation data with anonymous token; (3) -  check token validity, install the recipe if valid; (4) - upload garbled circuits with authorization token. The rest of the steps follow the scheme in Figure 1.}
 \end{figure}
 
 \paragraph{Anonymous recipe installation.} In order to achieve TAP anonymity,
