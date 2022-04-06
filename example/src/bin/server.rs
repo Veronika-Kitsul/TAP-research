@@ -1,5 +1,6 @@
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
+use std::fs::File;
 use std::io::{Read, Write};
 use hpke::{
     aead::{AeadTag, ChaCha20Poly1305},
@@ -16,15 +17,11 @@ fn decrypt_msg(
     tag_bytes: &[u8],
 ) -> Vec<u8>
 {
-    let server_sk = <Kem as KemTrait>::PrivateKey::from_bytes(server_sk_bytes).
-                    expect("could not deserealize server privkey");
     let tag = AeadTag::<Aead>::from_bytes(tag_bytes).expect("could not deserialize AEAD tag");
-    let encapped_key = <Kem as KemTrait>::EncappedKey::from_bytes(encapped_key_bytes).
-                    expect("could not deserialize the encapsulated pubkey");
 
     // decapsulate and derive the shared secret to create AEAD context
     let mut receiver_ctx = hpke::setup_receiver::<Aead, Kdf, Kem>
-                (&OpModeR::Base, &server_sk, &encapped_key, INFO_STR).expect("failed to set up receiver!");
+                (&OpModeR::Base,INFO_STR).expect("failed to set up receiver!");
 
     let mut plaintext = ciphertext.to_vec();
     receiver_ctx.open_in_place_detached(&mut plaintext, aad, &tag).expect("invalid ciphertext");
@@ -48,6 +45,10 @@ fn handle_client(mut stream: TcpStream) {
 }
 
 fn main() {
+    let mut file = File::open("private.txt")?;
+    let mut contents = <Kem as KemTrait>::PrivateKey::new(server_privkey);
+    file.read_to_string(&mut contents)?;
+
     let listener = TcpListener::bind("127.0.0.1").unwrap();
 
     //pass key

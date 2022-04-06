@@ -2,7 +2,9 @@ use std::io::{Read, Write};
 use std::net::TcpStream;
 use example::format::{Message,MessageType};
 use bincode;
+use std::fs::File;
 use rand::prelude::*;
+use std::io::prelude::*;
 use hpke::{
     aead::{AeadTag, ChaCha20Poly1305},
     kdf::HkdfSha384,
@@ -19,8 +21,16 @@ const INFO_STR: &[u8] = b"example session";
 // initialize the server with a key pair
 // can write it in a file serialized and then send to server adn the client and deserialize it
 fn server_init() -> (<Kem as KemTrait>::PrivateKey, <Kem as KemTrait>::PublicKey) {
+    // but what about this??? is this good? or the other one is better? should I write this into a file instead?
     let mut csprng = StdRng::from_entropy();
+
+    let mut file = File::create("private.txt");
+    file.write_all(Kem::pubkey);
+    let mut file = File::create("public.txt");
+    file.write_all(public_key);
+
     Kem::gen_keypair(&mut csprng)
+
 }
 
 fn encrypt_msg(
@@ -47,7 +57,11 @@ fn encrypt_msg(
 
 fn main() {
     // set up the server 
-    let (server_privkey, server_pubkey) = server_init();
+    let mut file = File::open("private.txt")?;
+    let mut contents = String::new(server_privkey);
+    file.read_to_string(&mut contents)?;
+
+    // let (server_privkey, server_pubkey) = server_init();
 
      // Create a message
     let msg = Message {
