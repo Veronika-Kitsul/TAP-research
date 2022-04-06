@@ -9,6 +9,7 @@ use hpke::{
 use rand::{rngs::StdRng, SeedableRng};
 use std::{fs::File, io::Write};
 
+
 type Kem = X25519HkdfSha256;
 
 fn server_init() -> (<Kem as KemTrait>::PrivateKey, <Kem as KemTrait>::PublicKey) {
@@ -26,8 +27,8 @@ fn main() {
     //println!("Private key: {}", String::from_utf8(private_key).unwrap());
     //println!("Public key: {}", String::from_utf8(public_key).unwrap());
 
-    //let mut file = File::create("private.txt")?;
-    //file.write_all(private_key)?;
-    //let mut file = File::create("public.txt")?;
-    //file.write_all(public_key)?;
+    let mut file = File::create("private.txt");
+    file.write(private_key.to_bytes());
+    let mut file = File::create("public.txt");
+    std::fs::write(public.txt, public_key.to_bytes());
 }
