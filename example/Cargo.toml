@@ -26,3 +26,7 @@ path = "src/bin/server.rs"
 [[bin]]
 name = "client"
 path = "src/bin/client.rs"
+
+[[bin]]
+name = "keygen"
+path = "src/bin/key.rs"
