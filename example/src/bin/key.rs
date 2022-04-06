@@ -21,14 +21,11 @@ fn server_init() -> (<Kem as KemTrait>::PrivateKey, <Kem as KemTrait>::PublicKey
 fn main() {
     let (private_key, public_key) = server_init();
 
-    println!("{:?}", private_key.to_bytes());
-    println!("{:?}", public_key.to_bytes());
+    //println!("{:?}", private_key.to_bytes());
+    //println!("{:?}", public_key.to_bytes());
 
-    //println!("Private key: {}", String::from_utf8(private_key).unwrap());
-    //println!("Public key: {}", String::from_utf8(public_key).unwrap());
-
-    let mut file = File::create("private.txt");
-    file.write(private_key.to_bytes());
-    let mut file = File::create("public.txt");
-    std::fs::write(public.txt, public_key.to_bytes());
+    let mut priv_file = File::create("private.txt").unwrap();
+    priv_file.write_all(private_key.to_bytes().as_slice());
+    let mut pub_file = File::create("public.txt").unwrap();
+    pub_file.write_all(public_key.to_bytes().as_slice());
 }
