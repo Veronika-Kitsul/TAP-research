@@ -2,12 +2,10 @@ TAP-research
 ------------
 
 Questions of the week:
-- diagram flow need to start doing now
-- security proofs
-- finish design and write up the paper up to that point
-- how about "Post new emails received in Gmail to Facebook Page"  as our lead expample? it's a real applet from Zapier for Business Gmail Accounts
+- security proofs - do we need to do them??? 
+- do we need to generate aad? 
+- do we need to drop bytes of keys after we've transformed them into key types in Kem? or maybe also clear files once we've retrieved the keys? or other ways to make sure the keys are secure?
 
-- Identified specific need or problem
 
 - Development of clear performance criteria
 
@@ -18,9 +16,6 @@ Questions of the week:
 - Statistically analyzed and documented results
 
 - Retesting and redesign
-
-- Consideration of feasibility
-
 ---------
 - Zapier can read gmail letters
 
