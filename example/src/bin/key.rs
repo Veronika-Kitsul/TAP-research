@@ -1,4 +1,3 @@
-use std::io;
 use std::io::Read;
 use std::io::BufReader;
 use hpke::{

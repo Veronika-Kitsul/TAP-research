@@ -1,12 +1,14 @@
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
 use std::fs::File;
+use std::io::BufReader;
 use std::io::{Read, Write};
+use rand::prelude::*;
 use hpke::{
     aead::{AeadTag, ChaCha20Poly1305},
     kdf::HkdfSha384,
     kem::X25519HkdfSha256,
-    Deserializable, Kem as KemTrait, OpModeR, OpModeS, Serializable,
+    Kem as KemTrait, OpModeS, Serializable, Deserializable
 };
 
 fn decrypt_msg(
@@ -45,9 +47,18 @@ fn handle_client(mut stream: TcpStream) {
 }
 
 fn main() {
-    let mut file = File::open("private.txt")?;
-    let mut contents = <Kem as KemTrait>::PrivateKey::new(server_privkey);
-    file.read_to_string(&mut contents)?;
+    // public key retrieval
+        // set up the server 
+        let f = File::open("public.txt").unwrap();
+        let mut reader = BufReader::new(f);
+        let mut pub_key_bytes = Vec::new();
+        
+        // Read file into vector.
+        reader.read_to_end(&mut pub_key_bytes).unwrap();
+
+        // deserialize into private key type from the file
+        let pub_key: <Kem as KemTrait>::PrivateKey =
+            Deserializable::from_bytes(&pub_key_bytes).unwrap();
 
     let listener = TcpListener::bind("127.0.0.1").unwrap();
 
