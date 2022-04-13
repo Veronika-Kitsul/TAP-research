@@ -1,6 +1,6 @@
 use std::io::{Read, Write};
 use std::net::TcpStream;
-use example::format::{Message,MessageType};
+use example::format::{Message,MessageType,TransmissionData};
 use bincode;
 use std::io::BufReader;
 use std::fs::File;
@@ -13,18 +13,19 @@ use hpke::{
 };
 
 // WHAT ARE THOSE ??? and how do we pick those?
+// more resources on the types of them
 type Kem = X25519HkdfSha256;
 type Aead = ChaCha20Poly1305;
 type Kdf = HkdfSha384;
 
 // WHAT IS THIS AND WHY DO WE NEED IT AND DO WE NEED TO CHANGE IT DEPENDING ON THE SESSION ??????
-const INFO_STR: &[u8] = b"example session";
+const INFO_STR: &[u8] = b"session";
 
 fn encrypt_msg(
-    // use serialized message but what is the data type ???
+    // passed the serialized message
     msg: &[u8],
     aad: &[u8],
-    pub_key: &<Kem as KemTrait>::PublicKey,) -> (<Kem as KemTrait>::EncappedKey, Vec<u8>, AeadTag<Aead>) {
+    pub_key: &<Kem as KemTrait>::PublicKey,) -> TransmissionData {
          let mut csprng = StdRng::from_entropy();
 
          let (encapsulated_key, mut encryption_context) =
@@ -33,16 +34,17 @@ fn encrypt_msg(
         
         // seal in place will encrypt the plaintext in place if success
         let mut msg_copy = msg.to_vec();
+
+        // ensures integrity
         let tag = encryption_context.seal_in_place_detached(&mut msg_copy, aad).expect("encryption failed!");
-
-// i honestly do not think this code is good because 
-// https://github.com/rozbb/rust-hpke/blob/HEAD/examples/client_server.rs
-// never uses msg variable in encyrpting
+ 
         // Rename for clarity
-    let ciphertext = msg_copy;
+        let ciphertext = msg_copy;
 
-        // return
-        (encapsulated_key, ciphertext, tag)
+        let encapsulated_key_vec = encapsulated_key.to_bytes().to_vec();
+        let tag_vec = tag.to_bytes().to_vec();
+
+        TransmissionData{encapped_key: encapsulated_key_vec, cyphertext: ciphertext, tag: tag_vec}
     }
 
 
@@ -68,33 +70,23 @@ fn main() {
     };
 
     // do we need to generate aad as well so it's more secure this was?
-    let aad = b"First encrypted message";
+    let aad = b"";
 
     // Marshall the message into bincode
     let serialized: Vec<u8> = bincode::serialize(&msg).unwrap();
 
-    let (encapsulated_key, ciphertext, tag) = encrypt_msg(&serialized, aad, &pub_key);
-
-    let encapsulated_key_bytes = encapsulated_key.to_bytes();
-    let tag_bytes = tag.to_bytes();
+    // symmetric 
+    let data = encrypt_msg(&serialized, aad, &pub_key);
+    let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
 
     // Open a connection to the server
     match TcpStream::connect("127.0.0.1") {
 
         Ok(mut stream) => {
             println!("Connected to the server!");
+            stream.write(&data_serialized).unwrap();
 
-            // send over the cyphertext
-
-            //  Alice sends the encapsulated key, message ciphertext, AAD, and auth tag to Bob
-            // how is bob supposed to nicely read it? should I create a struct for that? 
-
-            stream.write(&ciphertext).unwrap();
-
-            println!("Awaiting reply");
-
-            // I DON"T REMEMBER WHY DID I PUT IT HERE ??
-            let mut data = [0 as u8; 2000];
+            let mut data = [0 as u8; 5000];
 
             match stream.read_exact(&mut data) {
                 Ok(data) => {

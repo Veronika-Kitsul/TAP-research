@@ -1,6 +1,7 @@
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
 use std::fs::File;
+use example::format::{Message,MessageType,TransmissionData};
 use std::io::BufReader;
 use std::io::{Read, Write};
 use rand::prelude::*;
@@ -8,7 +9,7 @@ use hpke::{
     aead::{AeadTag, ChaCha20Poly1305},
     kdf::HkdfSha384,
     kem::X25519HkdfSha256,
-    Kem as KemTrait, OpModeS, Serializable, Deserializable
+    Kem as KemTrait, OpModeR, Serializable, Deserializable
 };
 
 type Kem = X25519HkdfSha256;
@@ -21,48 +22,41 @@ const INFO_STR: &[u8] = b"example session";
 fn decrypt_msg(
     ciphertext: &[u8],
     priv_key: &<Kem as KemTrait>::PrivateKey,
-    encapped_key: &EncappedKey<Kem::Kex>,
+    encapped_key: &[u8],
     info: &[u8]
 ) -> Vec<u8>
 {
-
-
-    // Now let the server decrypt the message. The to_bytes() calls returned a GenericArray, so we
-    // have to convert them to slices before sending them
-    let decrypted_msg = server_decrypt_msg(
-        server_privkey_bytes.as_slice(),
-        encapped_key_bytes.as_slice(),
-        &ciphertext,
-        associated_data,
-        tag_bytes.as_slice(),
-    );
-
     // Initiates a decryption context given a private key sk_recip and an encapsulated key 
     // which was encapsulated to sk_recip's corresponding public key
+     let encapped_key = hpke::Deserializable::from_bytes(&encapped_key).unwrap();
+
     let mut decryption_context =
     hpke::setup_receiver::<Aead, Kdf, Kem>(
         &OpModeR::Base,
         &priv_key,
-        &encapsulated_key,
+        &encapped_key,
         INFO_STR,
     ).expect("failed to set up receiver!");
-// To open without allocating:
-//     decryption_context.open_in_place_detached(&mut ciphertext, aad, &auth_tag)
-// To open with allocating:
-    let plaintext = decryption_context.open(&ciphertext, aad).expect("invalid ciphertext!");
-    println!("{}", plaintext);
+
+    let plaintext = decryption_context.open(&ciphertext, b"").expect("invalid ciphertext!");
+    println!("{:?}", plaintext);
     plaintext
 }
 
-fn handle_client(mut stream: TcpStream) {
-
-    // I think I had to use this cap on the amount of symbols because it wants a speicified type but how do I not cap it?
-    let mut data = [0 as u8; 2000]; 
+fn handle_client(mut stream: TcpStream, priv_key: <Kem as KemTrait>::PrivateKey) {
+    let mut data = [0 as u8; 5000]; 
     while match stream.read(&mut data) {
         Ok(size) => {
 
+            let data_deserialized: TransmissionData =
+            bincode::deserialize(&data).unwrap();
+
+            let cyphertext = data_deserialized.cyphertext;
+            let tag = data_deserialized.tag;
+            let encapped_key = data_deserialized.encapped_key;
+
             // decrypt the message 
-            decrypt_msg(data, );
+            decrypt_msg(&cyphertext, &priv_key, &encapped_key, INFO_STR);
             true
         }
         Err(e) => {
@@ -74,7 +68,7 @@ fn handle_client(mut stream: TcpStream) {
 }
 
 fn main() {
-    // public key retrieval
+    // private key retrieval
         // set up the server 
         let f = File::open("private.txt").unwrap();
         let mut reader = BufReader::new(f);
@@ -95,19 +89,14 @@ fn main() {
             Ok(stream) => {
                 println!("New connection: {}", stream.peer_addr().unwrap());
                 thread::spawn(move || {
-                    
-                    handle_client(stream)
-
-                // Unmarshall back to message struct
-
-                // Do something with the message
-                    
+                    // how to give each thread its own priv key ????
+                    handle_client(stream, priv_key.clone())
                 });
             }
             Err(e) => {
                 println!("Error: {}", e)
             }
         }
-        drop(listener);
+        drop(&listener);
     }
 }
