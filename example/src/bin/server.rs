@@ -17,7 +17,7 @@ type Aead = ChaCha20Poly1305;
 type Kdf = HkdfSha384;
 
 // but do i get this info from the client as well???
-const INFO_STR: &[u8] = b"example session";
+const INFO_STR: &[u8] = b"session";
 
 fn decrypt_msg(
     ciphertext: &[u8],
@@ -39,7 +39,6 @@ fn decrypt_msg(
     ).expect("failed to set up receiver!");
 
     let plaintext = decryption_context.open(&ciphertext, b"").expect("invalid ciphertext!");
-    println!("{:?}", plaintext);
     plaintext
 }
 
@@ -52,11 +51,12 @@ fn handle_client(mut stream: TcpStream, priv_key: <Kem as KemTrait>::PrivateKey)
             bincode::deserialize(&data).unwrap();
 
             let cyphertext = data_deserialized.cyphertext;
-            let tag = data_deserialized.tag;
             let encapped_key = data_deserialized.encapped_key;
 
             // decrypt the message 
-            decrypt_msg(&cyphertext, &priv_key, &encapped_key, INFO_STR);
+            let plaintext = decrypt_msg(&cyphertext, &priv_key, &encapped_key, INFO_STR);
+            let msg: Message = bincode::deserialize(&plaintext).unwrap();
+            println!("{:?}", msg);
             true
         }
         Err(e) => {
@@ -77,20 +77,19 @@ fn main() {
         // Read file into vector.
         reader.read_to_end(&mut priv_key_bytes).unwrap();
 
-        // deserialize into private key type from the file
-        let priv_key: <Kem as KemTrait>::PrivateKey =
-            Deserializable::from_bytes(&priv_key_bytes).unwrap();
-
-    let listener = TcpListener::bind("127.0.0.1").unwrap();
+    let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
 
     // Listen for connections on a loop
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
                 println!("New connection: {}", stream.peer_addr().unwrap());
+                // deserialize into private key type from the file
+                let priv_key: <Kem as KemTrait>::PrivateKey =
+                    Deserializable::from_bytes(&priv_key_bytes).unwrap();                
                 thread::spawn(move || {
                     // how to give each thread its own priv key ????
-                    handle_client(stream, priv_key.clone())
+                    handle_client(stream, priv_key)
                 });
             }
             Err(e) => {

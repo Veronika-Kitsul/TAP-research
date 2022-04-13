@@ -35,16 +35,11 @@ fn encrypt_msg(
         // seal in place will encrypt the plaintext in place if success
         let mut msg_copy = msg.to_vec();
 
-        // ensures integrity
-        let tag = encryption_context.seal_in_place_detached(&mut msg_copy, aad).expect("encryption failed!");
- 
-        // Rename for clarity
-        let ciphertext = msg_copy;
+        let ciphertext = encryption_context.seal(msg, aad).expect("encryption failed!");
 
         let encapsulated_key_vec = encapsulated_key.to_bytes().to_vec();
-        let tag_vec = tag.to_bytes().to_vec();
 
-        TransmissionData{encapped_key: encapsulated_key_vec, cyphertext: ciphertext, tag: tag_vec}
+        TransmissionData{encapped_key: encapsulated_key_vec, cyphertext: ciphertext}
     }
 
 
@@ -80,7 +75,7 @@ fn main() {
     let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
 
     // Open a connection to the server
-    match TcpStream::connect("127.0.0.1") {
+    match TcpStream::connect("127.0.0.1:8080") {
 
         Ok(mut stream) => {
             println!("Connected to the server!");

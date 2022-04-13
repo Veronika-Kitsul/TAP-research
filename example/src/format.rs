@@ -27,5 +27,4 @@ pub struct Message {
 pub struct TransmissionData {
     pub encapped_key: Vec<u8>,
     pub cyphertext: Vec<u8>,
-    pub tag:  Vec<u8>,
 }
