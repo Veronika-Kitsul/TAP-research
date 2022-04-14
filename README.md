@@ -4,9 +4,9 @@ TAP-research
 Questions of the week:
 - security proofs - do we need to do them??? 
 - do we need to generate aad? 
-- do we need to drop bytes of keys after we've transformed them into key types in Kem? or maybe also clear files once we've retrieved the keys? or other ways to make sure the keys are secure?
+- drop bytes of keys after we've transformed them into key types in Kem? or maybe also clear files once we've retrieved the keys? or other ways to make sure the keys are secure?
 
-
+-------
 - Development of clear performance criteria
 
 - Sufficient preliminary designs
@@ -62,9 +62,6 @@ Earlence Fernandes and Amir Rahmati et al. [17] quantify the risk users face in 
   - Security Analysis
   - Specify privacy and functionality goals
   - Start security proofs
-
-  Week 4 (of Mon Dec 13)
-  - Implementation details: software
 
 ------
 January timeline
