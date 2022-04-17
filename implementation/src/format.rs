@@ -6,11 +6,6 @@ use hpke::{
     Kem as KemTrait, OpModeS, Serializable, Deserializable
 };
 
-type Kem = X25519HkdfSha256;
-type Aead = ChaCha20Poly1305;
-type Kdf = HkdfSha384;
-
-
 #[derive(Serialize, Deserialize, Debug)]
 pub enum MessageType {
     TriggerToTAP,
