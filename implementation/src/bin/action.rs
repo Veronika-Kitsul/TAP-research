@@ -1,7 +1,7 @@
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
 use std::fs::File;
-use example::format::{Message,MessageType,TransmissionData};
+use implementation::format::{Message,MessageType,TransmissionData};
 use std::io::BufReader;
 use std::io::{Read, Write};
 use rand::prelude::*;

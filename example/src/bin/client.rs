@@ -12,7 +12,6 @@ use hpke::{
     Kem as KemTrait, OpModeS, Serializable, Deserializable
 };
 
-// WHAT ARE THOSE ??? and how do we pick those?
 // more resources on the types of them
 type Kem = X25519HkdfSha256;
 type Aead = ChaCha20Poly1305;
@@ -28,7 +27,7 @@ fn encrypt_msg(
     pub_key: &<Kem as KemTrait>::PublicKey,) -> TransmissionData {
          let mut csprng = StdRng::from_entropy();
 
-         let (encapsulated_key, mut encryption_context) =
+        let (encapsulated_key, mut encryption_context) =
         hpke::setup_sender::<Aead, Kdf, Kem, _>(&OpModeS::Base, &pub_key, INFO_STR, &mut csprng)
         .expect("invalid server pubkey!");
         

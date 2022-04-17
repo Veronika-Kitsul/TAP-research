@@ -1,0 +1,29 @@
+[package]
+name = "implementation"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+criterion = "0.3.5"
+serde = "1.0"
+serde_derive = "1.0.136"
+bincode = "1.2.1"
+serde-encrypt = "0.6.0"
+hpke = "0.8.0"
+rand = "0.8.4"
+
+[[bin]]
+name = "action"
+path = "src/bin/action.rs"
+
+[[bin]]
+name = "trigger"
+path = "src/bin/trigger.rs"
+
+[[bin]]
+name = "tap"
+path = "src/bin/tap.rs"
+
+[[bin]]
+name = "keygen"
+path = "src/bin/keygen.rs"
