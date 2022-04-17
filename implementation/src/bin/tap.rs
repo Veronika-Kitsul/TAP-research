@@ -1,7 +1,7 @@
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
 use std::fs::File;
-use implementation::format::{Message,MessageType,TransmissionData};
+use implementation::format::{TransmissionData};
 use std::io::BufReader;
 use std::io::{Read, Write};
 use rand::prelude::*;
@@ -44,25 +44,35 @@ fn main() {
         // Read file into vector.
         reader.read_to_end(&mut priv_key_bytes).unwrap();
 
-    let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
+    let requested_data = b"Most recent email.";
+    
+    // connect to the trigger on port 8080
+    match TcpStream::connect("127.0.0.1:8080") {
 
-    // Listen for connections on a loop
-    for stream in listener.incoming() {
-        match stream {
-            Ok(stream) => {
-                println!("New connection: {}", stream.peer_addr().unwrap());
-                // deserialize into private key type from the file
-                let priv_key: <Kem as KemTrait>::PrivateKey =
-                    Deserializable::from_bytes(&priv_key_bytes).unwrap();                
-                thread::spawn(move || {
-                    // how to give each thread its own priv key ????
-                    handle_client(stream, priv_key)
-                });
-            }
-            Err(e) => {
-                println!("Error: {}", e)
+        Ok(mut stream) => {
+            println!("Connected to the trigger!");
+            stream.write(&requested_data).unwrap();
+
+            let mut received_data = [0 as u8; 5000];
+
+            match stream.read_exact(&mut received_data) {
+                Ok(data) => {
+
+                    println!("{:?}", received_data);
+
+                    // connect to the action service
+                    match TcpStream::connect("127.0.0.1:8082") {
+
+                        Ok(mut stream) => {
+                            println!("Connected to the trigger!");
+                            stream.write(&received_data).unwrap();
+                        }
+                    }
+                }
+                Err(e) => {
+                    println!("Failed to receive data: {}", e);
+                }
             }
         }
-        drop(&listener);
     }
 }

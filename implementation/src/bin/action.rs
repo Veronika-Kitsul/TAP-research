@@ -17,7 +17,6 @@ type Kem = X25519HkdfSha256;
 type Aead = ChaCha20Poly1305;
 type Kdf = HkdfSha384;
 
-// but do i get this info from the client as well???
 const INFO_STR: &[u8] = b"session";
 
 fn decrypt_msg(

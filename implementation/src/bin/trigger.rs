@@ -1,7 +1,9 @@
 use std::io::{Read, Write};
 use std::net::TcpStream;
+use std::net::{TcpListener, Shutdown};
 use implementation::format::{Message,MessageType,TransmissionData};
 use bincode;
+use std::thread;
 use std::io::BufReader;
 use std::fs::File;
 use rand::prelude::*;
@@ -41,10 +43,36 @@ fn encrypt_msg(
         TransmissionData{encapped_key: encapsulated_key_vec, cyphertext: ciphertext}
     }
 
+fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) -> TransmissionData {
+    let mut data = [0 as u8; 5000]; 
+    while match stream.read(&mut data) {
+        Ok(size) => {
+
+            let aad = b"";
+            let content = "Hello";
+
+            let msg = Message {
+                msgtype: MessageType::TriggerToTAP,
+                contents: content.as_bytes().to_vec(),
+            };
+
+            let serialized: Vec<u8> = bincode::serialize(&msg).unwrap();
+
+            // encrypt the message 
+            let data = encrypt_msg(&serialized, &aad, &pub_key);
+                let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
+            data_serialized
+        }
+        Err(e) => {
+            println!("An error occured, terminating connection with {}", stream.peer_addr().unwrap());
+            stream.shutdown(Shutdown::Both).unwrap();
+            false
+        }
+    } {}
+}
 
 fn main() {
      // public key retrieval
-        // set up the server 
         let f = File::open("public.txt").unwrap();
         let mut reader = BufReader::new(f);
         let mut pub_key_bytes = Vec::new();
@@ -56,45 +84,49 @@ fn main() {
         let pub_key: <Kem as KemTrait>::PublicKey =
             Deserializable::from_bytes(&pub_key_bytes).unwrap();
 
-     // Create a message
-     // MESSAGE CONTENTS HOW DO WE GET HERE ????
-    let msg = Message {
-        msgtype: MessageType::Type1,
-        contents: b"Hello".to_vec(),
-    };
 
-    // do we need to generate aad as well so it's more secure this was?
-    let aad = b"";
+    // Listen for connections on a loop
+    let listener = TcpListener::bind("127.0.0.1:8081").unwrap();
+    for stream in listener.incoming() {
+        match stream {
+            Ok(stream) => {
+                println!("New connection: {}", stream.peer_addr().unwrap());
+                // deserialize into private key type from the file
+              
 
-    // Marshall the message into bincode
-    let serialized: Vec<u8> = bincode::serialize(&msg).unwrap();
+                thread::spawn(move || {
+                    handle_tap(stream, pub_key)
+                    // Open a connection to the tap on port 8081
+                    match TcpStream::connect("127.0.0.1:8081") {
 
-    // symmetric 
-    let data = encrypt_msg(&serialized, aad, &pub_key);
-    let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
+                        Ok(mut stream) => {
+                            println!("Connected to the TAP!");
+                            stream.write(&data_serialized).unwrap();
+        
+                            let mut data = [0 as u8; 5000];
+        
+                            match stream.read_exact(&mut data) {
+                                Ok(data) => {
+                                    println!("{:?}", data)
+                                }
+                                Err(e) => {
+                                    println!("Failed to receive data: {}", e);
+                                }
+                            }
+                        }
+                    }});
+        
+                    Err(e) => {
+                        println!("Failed to connect: {}", e);
+                    }
 
-    // Open a connection to the server
-    match TcpStream::connect("127.0.0.1:8080") {
+                println!("Terminated.");
+            }
 
-        Ok(mut stream) => {
-            println!("Connected to the server!");
-            stream.write(&data_serialized).unwrap();
-
-            let mut data = [0 as u8; 5000];
-
-            match stream.read_exact(&mut data) {
-                Ok(data) => {
-                    println!("{:?}", data)
-                }
-                Err(e) => {
-                    println!("Failed to receive data: {}", e);
-                }
+            Err(e) => {
+                println!("Error: {}", e)
             }
         }
-        
-        Err(e) => {
-            println!("Failed to connect: {}", e);
-        }
+        drop(&listener);
     }
-    println!("Terminated.");
 }
