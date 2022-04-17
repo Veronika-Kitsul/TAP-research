@@ -1,15 +1,16 @@
+// DONE except need to import format.rs file 
+
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
 use std::fs::File;
 use implementation::format::{Message,MessageType,TransmissionData};
 use std::io::BufReader;
-use std::io::{Read, Write};
-use rand::prelude::*;
+use std::io::{Read};
 use hpke::{
     aead::{AeadTag, ChaCha20Poly1305},
     kdf::HkdfSha384,
     kem::X25519HkdfSha256,
-    Kem as KemTrait, OpModeR, Serializable, Deserializable
+    Kem as KemTrait, OpModeR, Deserializable
 };
 
 type Kem = X25519HkdfSha256;
@@ -79,7 +80,7 @@ fn main() {
         // Read file into vector.
         reader.read_to_end(&mut priv_key_bytes).unwrap();
 
-    let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
+    let listener = TcpListener::bind("127.0.0.1:8081").unwrap();
 
     // Listen for connections on a loop
     for stream in listener.incoming() {
@@ -88,9 +89,9 @@ fn main() {
                 println!("New connection: {}", stream.peer_addr().unwrap());
                 // deserialize into private key type from the file
                 let priv_key: <Kem as KemTrait>::PrivateKey =
-                    Deserializable::from_bytes(&priv_key_bytes).unwrap();                
+                    Deserializable::from_bytes(&priv_key_bytes).unwrap();      
+
                 thread::spawn(move || {
-                    // how to give each thread its own priv key ????
                     handle_client(stream, priv_key)
                 });
             }
