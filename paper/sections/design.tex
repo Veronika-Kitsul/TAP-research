@@ -1,24 +1,29 @@
-\section{Design}
+\section{\sys design}
 \label{sec:design}
 
+In this section, we describe our \sys protocols. We first describe the privacy
+protocol (Figure~\ref{fig:privacy}) that achieves TAP privacy and action service
+privacy. Then, we describe the anonymity protocol (Figure~\ref{fig:anonymity})
+that achieves recipe anonymity.
 
-In this section, we first describe a basic protocol that achieves TAP privacy
-and action service privacy, and then describe an extension that achieves TAP
-anonymity.
-
-\subsection{The basic protocol}
+\subsection{Privacy protocol}
+\label{sec:privacy}
 
 \begin{figure}
 \includegraphics[width=8cm]{graphics/ACACIA.png}
-\caption{\textbf{Basic protocol recipe installation scheme.} (1) - recipe installation; (2) - send encrypted
-recipe information; (3) - generate and send garbled circuits; (4) - get trigger data $x_t$ and execute 
-$P(x_t, c_t)$; (5) - garbled inputs for $f(x_t, c_t$; (6) - execute $f(x_t, c_a)$; (7) - send $y$; (8) - decrypt
-$y$ to get action data.}
+\caption{\textbf{Privacy protocol flow:} (1) Recipe
+  installation, (2) send encrypted recipe information, (3) generate and send
+  garbled circuits, (4) get trigger data $x_t$ and execute $p(x_t, c_t)$, (5)
+  send garbled inputs for computation of $f(x_t, c_t)$, (6) execute $f(x_t,
+  c_a)$ in MPC, (7) send encrypted output $y$, (8) decrypt $y$ to get action
+  data.}
+\label{fig:privacy}
 \end{figure}
 
 \paragraph{Setup.}
-Each trigger service $t \in [T]$ has a key pair $(\skt_t, \pkt_t)$ and each
-action service $a \in [A]$ has a key pair $(\ska_a, \pka_a)$.
+Each trigger service $t \in [T]$ has a private-public key pair $(\skt_t,
+\pkt_t)$ and each action service $a \in [A]$ has a private-public key pair
+$(\ska_a, \pka_a)$.
 
 \paragraph{Recipe installation.}
 To set up a recipe on the TAP, the client specifies the following through the
@@ -50,16 +55,23 @@ c_a)$ using MPC and sends the encrypted result to the action service $a$. The
 action service $a$ decrypts to recover the action data, and then performs its
 action.
 
-\subsection{Anonymity extension}
+\subsection{Anonymity protocol}
+While the above protocol achieves TAP privacy and action service privacy, the
+TAP still learns the recipes a client installs along with the trigger and action
+services it uses. Here, we describe an anonymity protocol that addresses this
+leakage.
 
 \begin{figure}
 \includegraphics[height=8cm]{graphics/Proxy1.png}
-\caption{\textbf{Anonymous recipe installation protocol scheme.} (1) - Get anonymous tokens; (2) - send
-recipe installation data with anonymous token; (3) -  check token validity, install the recipe if valid; (4) -
-upload garbled circuits with authorization token. The rest of the steps follow the scheme in Figure 1.}
+\caption{\textbf{Anonymous protocol flow:} (1) Get anonymous tokens, (2) send
+  recipe installation data with anonymous token, (3) check token validity and
+  install recipe if valid, (4) upload garbled circuits with authorization
+  token. The rest of the steps follow the privacy protocol
+  (Figure~\ref{fig:privacy}).}
+\label{fig:anonymity}
 \end{figure}
 
-\paragraph{Anonymous recipe installation.} In order to achieve TAP anonymity,
+\paragraph{Anonymous recipe installation.} In order to achieve recipe anonymity,
 clients first need a way to install recipes anonymously. The main cryptographic
 tool we use is an anonymous token. This allows the TAP to issue tokens that
 authorize clients to install recipes. When the client later wishes to install a
@@ -70,16 +82,15 @@ issuance, so the TAP cannot learn who it initially issued this token to.
 
 \paragraph{Anonymous garbled circuit generation.}
 Similar to anonymous recipe installation, clients upload garbled circuits
-anonymously through an anonymity proxy and present an anonymous token that
+anonymously through the anonymity proxy and present an anonymous token that
 authorizes the client to upload garbled circuits for a particular recipe.
 
-\paragraph{Anonymous recipe execution.} Recipes execute as in the basic
+\paragraph{Anonymous recipe execution.} Recipes execute as in the privacy
 protocol, since the garbled circuits for MPC are already set up on the TAP.
 
 \subsection{Security analysis}
 
-Here, we give an informal security analysis and defer the formal analysis to
-later.
+Here, we analyze the security of our protocols.
 
 \paragraph{TAP privacy.} For TAP privacy, the TAP should not learn $x_t$, $c_t$,
 $c_a$, or the result of $f(x_t, c_a)$:
@@ -101,10 +112,10 @@ $f(x_t, c_a)$.
     MPC.
 \end{itemize}
 
-\paragraph{TAP anonymity.} For TAP anonymity, the TAP should not be able to link
-installed rules to a particular client.
+\paragraph{Recipe anonymity.} For recipe anonymity, the TAP should not be able to link
+installed recipes to a particular client.
 \begin{itemize}
-  \item The TAP cannot link installed rules to a particular client, since recipe
+  \item The TAP cannot link installed recipes to a particular client, since recipe
     installation and garbled circuit uploads are done using an anonymity proxy
     and are authorized via anonymous tokens.
 \end{itemize}

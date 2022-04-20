@@ -16,25 +16,27 @@ wears a Fitbit to track their sleep duration. If the Fitbit records a sleep
 duration under some target duration, the platform adds a reminder to the
 client's Google Calendar to sleep more the next day. The platform connects the
 Fitbit and Google Calendar services together through the recipe ``If sleep is
-under a target duration, then add a reminder to Google Calendar.'' \kl{New example.}
+under a target duration, then add a reminder to Google Calendar.'' \kl{TODO: New
+  example.}
 %\kl{This 
 %example is from the Walnut paper~\cite{DBLP:journals/corr/abs-2009-12447}, but we should come with
 %another, more compelling example by analyzing more applets real people use.} 
 
-One of the first and most popular TAPs is IFTTT (``If This Then That'') that
+One of the first and most popular TAPs is IFTTT (``If This Then That''), which
 works with over 700 services and more than 20 million users around the
 world~\cite{ifttt-website, DBLP:conf/sp/ChenCWSCF21}.  Because IFTTT has access
 to a vast number of devices and users' data, and computes over sensitive data to
-run millions of actions on their users' behalf, it is a prime target for
-attackers. Many scholars have been examining IFTTT-like services for years to
-point out their numerous security and privacy flaws and suggest better
+run millions of recipes on users' behalf, a data breach could have severe
+consequences. Many scholars have examined IFTTT-like services for years to point
+out their numerous security and privacy flaws and suggest better
 practices~\cite{DBLP:conf/sp/ChenCWSCF21, DBLP:journals/corr/abs-2009-12447,
   DBLP:conf/imc/MiQZW17, DBLP:journals/corr/FernandesRJP17,
-  DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}.  However,
-even if there are ways to be more secure, private companies would not employ
-them because they \emph{would} like to know everything about you as a user.
+  DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}.  Even with
+security countermeasures in place, privacy-conscious companies may not integrate
+with IFTTT, because the platform would learn sensitive information about their
+users.
 
-Today's TAPs learn much information about clients:
+For example, today's TAPs learn at least the following information about clients:
 \begin{itemize}[leftmargin=*]
   \item the services (both trigger and action, for example Fitbit and Google Calendar),
   \item the recipe semantics (``If sleep is under a target duration, then add a
@@ -46,12 +48,16 @@ Today's TAPs learn much information about clients:
 Privacy-preserving TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and
 Walnut~\cite{DBLP:journals/corr/abs-2009-12447}) propose using multi-party
 computation (MPC) to hide inputs to the applet from the TAP. However, prior work
-doesn't cover all of the abovementioned sources of leakage, which is a
-substantial fault. Ideally, the TAP should learn no information about the client
-(besides timing information). In this project, we ask if such a TAP design is
-possible, and if so, what are the costs.
+does not cover all of the abovementioned sources of leakage and has considerable
+performance overhead. Ideally, the TAP should learn no information about the
+client (besides timing information). In this paper, we ask if such a TAP design
+is possible, and if so, what are the costs.
 
 The main contributions of this work are as follows:
 \begin{itemize}[leftmargin=*]
-  \item \kl{TODO}
+  \item We propose \sys, a practical, privacy-preserving trigger-action platform
+    that uses multi-party computation to \kl{TODO}.
+  \item We also present an extension to \sys that \kl{TODO}.
+  \item We implement a prototype of \sys that supports commonly used TAP
+    functionality.
 \end{itemize}

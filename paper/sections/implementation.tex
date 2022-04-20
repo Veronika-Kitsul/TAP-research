@@ -1,31 +1,73 @@
 \section{Implementation}
 \label{sec:implementation}
 
-\subsection{Used tools}
+We implement the privacy protocol of \sys (described in
+Section~\ref{sec:privacy}) in \kl{X,XXX} lines of Rust code. We choose Rust for
+efficiency, which reduces computation costs and hence latency, and memory
+safety, which prevents low-level security vulnerabilities.
 
-We implement a prototype of \sys in Rust. Chen et al. \cite{DBLP:conf/sp/ChenCWSCF21} in their work use Python, however, we provide some reasons why we think Rust is better here: 
-\begin{itemize}
-	\item very fast and memory efficient (about on the same speed level as C);
-	\item powerful features for combining many functions and libraries;
-	\item extensive support system and vast amount of available crates;
-	\item ensures high safety, the compiler pings every possible bug (prevention of references to freed memory, concurrent memory access, etc.);
-	\item gives the ability to claim ownership of specific pieces of data, nothing else will be able to modify it;
-	\item efficient succinct code;
-	\item number one choice among many computer science researchers.
-\end{itemize}
+Our \sys prototype currently only supports the identity transformation for
+$f(x_t, c_a)$, which is essentially end-to-end encryption between trigger and
+action services. Fortunately, it turns out that this alone is sufficient for
+supporting most commonly used TAP functionality, since our system design pushes
+predicate computations to the trigger services. For encryption, we use the
+standardized hybrid public-key encryption (HPKE) scheme \kl{cite}.
 
-\subsection{System components}
-\paragraph{Trigger service code.}
-Trigger service listens to the connections from TAP on the loop. When it receives the connection, it
-processes the information to send, encrypts it, and writes it to the stream.
+Our prototype includes three components:
 
-\paragraph{TAP code.}
-TAP serves essentially as a channel for sending encrypted data from the trigger service to action service. 
-TAP initiates the connection with the trigger, and upon receiving the requested data, sends it directly to
-the action service. With such communication scheme, TAP learns virtually nothing about the data it is
-getting, while trigger and action services do not communicate directly and do not know about each other.
+\paragraph{Trigger service.} The trigger service listens to polls from the
+    TAP. Upon being polled, the trigger service will process a predicate over
+    trigger data, encrypt the trigger data to the action service, and send
+    predicate output and encrypted trigger data to the TAP.
+    
+\paragraph{Trigger-action platform.} The TAP polls the trigger service,
+    receives the predicate output and encrypted trigger data, and forwards the
+    encrypted trigger data to the action service if the predicate output is 1.
+    
+\paragraph{Action service.} The action service receives and decrypts the
+    encrypted trigger data from the TAP, which it can then use to execute the
+    desired action.
 
+%\paragraph{Trigger service code.}
+%Trigger service listens to the connections from TAP on the loop. When it
+%receives the connection, it processes the information to send, encrypts it, and
+%writes it to the stream.
+%
+%\paragraph{TAP code.}
+%TAP serves essentially as a channel for sending encrypted data from the trigger service to action service. 
+%TAP initiates the connection with the trigger, and upon receiving the requested data, sends it directly to
+%the action service. With such communication scheme, TAP learns virtually nothing about the data it is
+%getting, while trigger and action services do not communicate directly and do not know about each other.
+%
+%\paragraph{Action service code.}
+%Action service has all features of a server, as it listens to the incoming connections from TAP on the loop,
+%decrypts the received data, and then implements the action it is asked to do.
 
-\paragraph{Action service code.}
-Action service has all features of a server, as it listens to the incoming connections from TAP on the loop,
-decrypts the received data, and then implements the action it is asked to do.
+%\subsection{Used tools}
+%
+%We implement a prototype of \sys in Rust. Chen et al. \cite{DBLP:conf/sp/ChenCWSCF21} in their work use Python, however, we provide some reasons why we think Rust is better here: 
+%\begin{itemize}
+%	\item very fast and memory efficient (about on the same speed level as C);
+%	\item powerful features for combining many functions and libraries;
+%	\item extensive support system and vast amount of available crates;
+%	\item ensures high safety, the compiler pings every possible bug (prevention of references to freed memory, concurrent memory access, etc.);
+%	\item gives the ability to claim ownership of specific pieces of data, nothing else will be able to modify it;
+%	\item efficient succinct code;
+%	\item number one choice among many computer science researchers.
+%\end{itemize}
+%
+%\subsection{System components}
+%\paragraph{Trigger service code.}
+%Trigger service listens to the connections from TAP on the loop. When it receives the connection, it
+%processes the information to send, encrypts it, and writes it to the stream.
+%
+%\paragraph{TAP code.}
+%TAP serves essentially as a channel for sending encrypted data from the trigger service to action service. 
+%TAP initiates the connection with the trigger, and upon receiving the requested data, sends it directly to
+%the action service. With such communication scheme, TAP learns virtually nothing about the data it is
+%getting, while trigger and action services do not communicate directly and do not know about each other.
+%
+%
+%\paragraph{Action service code.}
+%Action service has all features of a server, as it listens to the incoming connections from TAP on the loop,
+%decrypts the received data, and then implements the action it is asked to do.
