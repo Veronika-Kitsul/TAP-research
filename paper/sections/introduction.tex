@@ -37,7 +37,7 @@ with IFTTT, because the platform would learn sensitive information about their
 users.
 
 For example, today's TAPs learn at least the following information about clients:
-\begin{itemize}[leftmargin=*]
+\begin{itemize}
   \item the services (both trigger and action, for example Fitbit and Google Calendar),
   \item the recipe semantics (``If sleep is under a target duration, then add a
     reminder to Google Calendar.''),
@@ -53,11 +53,11 @@ performance overhead. Ideally, the TAP should learn no information about the
 client (besides timing information). In this paper, we ask if such a TAP design
 is possible, and if so, what are the costs.
 
-The main contributions of this work are as follows:
-\begin{itemize}[leftmargin=*]
-  \item We propose \sys, a practical, privacy-preserving trigger-action platform
-    that uses multi-party computation to \kl{TODO}.
-  \item We also present an extension to \sys that \kl{TODO}.
-  \item We implement a prototype of \sys that supports commonly used TAP
-    functionality.
+Our main contributions are the following:
+\begin{itemize}
+  \item We propose \sys, a trigger-action platform that achieves strong privacy
+    and anonymity guarantees.
+  \item We implement a prototype of \sys in Rust.
+  \item We find that our \sys protype supports the most commonly used TAP
+    functionality and does so with low performance overhead.
 \end{itemize}

@@ -3,15 +3,15 @@
 
 We implement the privacy protocol of \sys (described in
 Section~\ref{sec:privacy}) in \kl{X,XXX} lines of Rust code. We choose Rust for
-efficiency, which reduces computation costs and hence latency, and memory
-safety, which prevents low-level security vulnerabilities.
+(1) efficiency, which reduces computation costs and hence latency, and (2)
+memory safety, which prevents low-level security vulnerabilities.
 
 Our \sys prototype currently only supports the identity transformation for
 $f(x_t, c_a)$, which is essentially end-to-end encryption between trigger and
 action services. Fortunately, it turns out that this alone is sufficient for
 supporting most commonly used TAP functionality, since our system design pushes
 predicate computations to the trigger services. For encryption, we use the
-standardized hybrid public-key encryption (HPKE) scheme \kl{cite}.
+hybrid public-key encryption (HPKE) scheme \kl{cite}.
 
 Our prototype includes three components:
 

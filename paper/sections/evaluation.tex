@@ -1,31 +1,42 @@
 \section{Evaluation}
 \label{sec:evaluation}
 
-We experimentally answer the following main questions:
+We answer the following evaluation questions:
 \begin{itemize}
+  \item What functionality can \sys support?
   \item What are the computation and communication costs for each of the parties
-    in our system?
-  \item How do the added privacy and anonymity guarantees affect the latency and
-    throughput of our system?
+    in \sys?
 \end{itemize}
 
-\paragraph{Computation and communication costs.}
-\begin{itemize}
-  \item \textbf{Client to TAP.} What are the computation and communication costs
-    to generate garbled circuits?
-  \item \textbf{Trigger service to TAP.} Given trigger data, what are
-    computation and communication costs to execute predicates over trigger data
-    and send garbled inputs to the TAP?
-  \item \textbf{TAP to action service.} What are the computation and
-    communication costs to execute transformations using MPC and send the
-    results to the action service?
-\end{itemize}
+\paragraph{\sys supports most common TAP functionality.}
 
-\paragraph{Throughput and latency.}
-\begin{itemize}
-  \item \textbf{Throughput.} How many recipes executions can the TAP execute per
-    minute?
-  \item \textbf{Latency.} How long does it take to execute a recipe end-to-end
-    from trigger data arrival at the trigger service to action data decryption
-    at the action service?
-\end{itemize}
+\paragraph{\sys is highly performant.}
+
+%We experimentally answer the following main questions:
+%\begin{itemize}
+%  \item What are the computation and communication costs for each of the parties
+%    in our system?
+%  \item How do the added privacy and anonymity guarantees affect the latency and
+%    throughput of our system?
+%\end{itemize}
+%
+%\paragraph{Computation and communication costs.}
+%\begin{itemize}
+%  \item \textbf{Client to TAP.} What are the computation and communication costs
+%    to generate garbled circuits?
+%  \item \textbf{Trigger service to TAP.} Given trigger data, what are
+%    computation and communication costs to execute predicates over trigger data
+%    and send garbled inputs to the TAP?
+%  \item \textbf{TAP to action service.} What are the computation and
+%    communication costs to execute transformations using MPC and send the
+%    results to the action service?
+%\end{itemize}
+%
+%\paragraph{Throughput and latency.}
+%\begin{itemize}
+%  \item \textbf{Throughput.} How many recipes executions can the TAP execute per
+%    minute?
+%  \item \textbf{Latency.} How long does it take to execute a recipe end-to-end
+%    from trigger data arrival at the trigger service to action data decryption
+%    at the action service?
+%\end{itemize}
