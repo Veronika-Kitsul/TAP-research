@@ -92,7 +92,6 @@ fn main() {
             Ok(stream) => {
                 println!("New connection: {}", stream.peer_addr().unwrap());
                 // deserialize into private key type from the file
-              
 
                 thread::spawn(move || {
                     handle_tap(stream, pub_key)

@@ -14,8 +14,18 @@ We implement a prototype of \sys in Rust. Chen et al. \cite{DBLP:conf/sp/ChenCWS
 	\item number one choice among many computer science researchers.
 \end{itemize}
 
-\subsection{Trigger service code}
+\subsection{System components}
+\paragraph{Trigger service code.}
+Trigger service listens to the connections from TAP on the loop. When it receives the connection, it
+processes the information to send, encrypts it, and writes it to the stream.
 
-\subsection{TAP code}
+\paragraph{TAP code.}
+TAP serves essentially as a channel for sending encrypted data from the trigger service to action service. 
+TAP initiates the connection with the trigger, and upon receiving the requested data, sends it directly to
+the action service. With such communication scheme, TAP learns virtually nothing about the data it is
+getting, while trigger and action services do not communicate directly and do not know about each other.
 
-\subsection{Action service code}
+
+\paragraph{Action service code.}
+Action service has all features of a server, as it listens to the incoming connections from TAP on the loop,
+decrypts the received data, and then implements the action it is asked to do.
