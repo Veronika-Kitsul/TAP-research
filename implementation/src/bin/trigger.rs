@@ -43,11 +43,10 @@ fn encrypt_msg(
         TransmissionData{encapped_key: encapsulated_key_vec, cyphertext: ciphertext}
     }
 
-fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) -> TransmissionData {
+fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) -> Vec<u8> {
     let mut data = [0 as u8; 5000]; 
-    while match stream.read(&mut data) {
+    match stream.read(&mut data) {
         Ok(size) => {
-
             let aad = b"";
             let content = "Hello";
 
@@ -59,30 +58,26 @@ fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) -> T
             let serialized: Vec<u8> = bincode::serialize(&msg).unwrap();
 
             // encrypt the message 
-            let data = encrypt_msg(&serialized, &aad, &pub_key);
-                let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
+            let data = encrypt_msg(&serialized, aad, &pub_key);
+            let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
             data_serialized
-        }
+        },
         Err(e) => {
             println!("An error occured, terminating connection with {}", stream.peer_addr().unwrap());
             stream.shutdown(Shutdown::Both).unwrap();
-            false
+            vec![]
         }
-    } {}
+    }
 }
 
 fn main() {
-     // public key retrieval
-        let f = File::open("public.txt").unwrap();
-        let mut reader = BufReader::new(f);
-        let mut pub_key_bytes = Vec::new();
-        
-        // Read file into vector.
-        reader.read_to_end(&mut pub_key_bytes).unwrap();
-
-        // deserialize into private key type from the file
-        let pub_key: <Kem as KemTrait>::PublicKey =
-            Deserializable::from_bytes(&pub_key_bytes).unwrap();
+    // public key retrieval
+    let f = File::open("public.txt").unwrap();
+    let mut reader = BufReader::new(f);
+    let mut pub_key_bytes = Vec::new();
+    
+    // Read file into vector.
+    reader.read_to_end(&mut pub_key_bytes).unwrap();
 
 
     // Listen for connections on a loop
@@ -92,33 +87,36 @@ fn main() {
             Ok(stream) => {
                 println!("New connection: {}", stream.peer_addr().unwrap());
                 // deserialize into private key type from the file
-
+                let pub_key: <Kem as KemTrait>::PublicKey =
+                    Deserializable::from_bytes(&pub_key_bytes).unwrap();                             
                 thread::spawn(move || {
-                    handle_tap(stream, pub_key)
+
+                    handle_tap(stream, pub_key);
                     // Open a connection to the tap on port 8081
                     match TcpStream::connect("127.0.0.1:8081") {
 
                         Ok(mut stream) => {
                             println!("Connected to the TAP!");
-                            stream.write(&data_serialized).unwrap();
+                            //stream.write(&data_serialized).unwrap();
         
                             let mut data = [0 as u8; 5000];
         
                             match stream.read_exact(&mut data) {
                                 Ok(data) => {
                                     println!("{:?}", data)
-                                }
+                                },
+                                
                                 Err(e) => {
                                     println!("Failed to receive data: {}", e);
                                 }
                             }
-                        }
-                    }});
-        
-                    Err(e) => {
-                        println!("Failed to connect: {}", e);
+                        },
+                        
+                        Err(e) => {
+                            println!("Failed to connect: {}", e);
+                        },
                     }
-
+                });
                 println!("Terminated.");
             }
 
