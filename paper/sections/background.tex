@@ -3,18 +3,18 @@
 
 \subsection{Trigger-action systems}
 
-Trigger-action systems have three main components: trigger services
-(TS), action services (AS), and the trigger-action platform (TAP). Users
-interact TAPs through their devices (typically a
-smartphone)~\cite{DBLP:conf/sp/ChenCWSCF21}. Clients configure ``recipes'' in
-the system by specifying triggers (``if my Fitbit sends a sleep data'') and
-actions (``create a Google Calendar reminder to sleep more''). \kl{TODO: Update
-  example.}
+Trigger-action systems have three main components: trigger services (TS), action
+services (AS), and the trigger-action platform (TAP). Clients interact with TAPs
+through trusted computing devices (typically their
+smartphones)~\cite{DBLP:conf/sp/ChenCWSCF21}. Clients configure ``recipes'' with
+the TAP by specifying triggers (i.e., ``if my Fitbit sends a sleep data'') and
+actions (i.e., ``create a Google Calendar reminder to sleep more''). \kl{TODO:
+  Update example.}
 
-TAPs do not require their users to have any technical skills to build
-complicated automated functions for their everyday use, which is one of the
-reasons for their popularity. In addition, they can find hundreds of ready-made
-applets for their usage by simply typing the services they want to
+\kl{TODO: Update rest.} TAPs do not require their users to have any technical
+skills to build complicated automated functions for their everyday use, which is
+one of the reasons for their popularity. In addition, they can find hundreds of
+ready-made applets for their usage by simply typing the services they want to
 integrate. The templates are published by both the developers to ease people's
 lives and by the users themselves, who would like to share their applets with
 community. Those are not known to be regulated in any way.
@@ -99,6 +99,21 @@ information than intended. In the malicious setting, parties can arbitrarily
 deviate from the prescribed protocol (correctness and privacy are, of course,
 more difficult to achieve in this setting).
 
+\paragraph{Yao's garbled circuits.}
+Yao's garbled circuits is a two-party computation protocol that allows two
+mistrusting parties to jointly compute a function over their private inputs. The
+function is represented as a boolean circuit known to both parties, which we
+will call the \emph{garbler} and the \emph{evaluator}. The garbler first
+``garbles'' (i.e., encrypts) the circuit and sends the garbled circuit to the
+evaluator along with the garbler's encrypted input. The garbler also generates
+encrypted inputs for the evaluator, which the evaluator can privately retrieve
+using a protocol known as oblivious transfer (the evaluator learns its garbled
+input but the garbler learns nothing). Now that the evaluator has the garbled
+circuit and both garbled inputs, it evaluates the garbled circuit to obtain the
+output of the function, which is shared with the evaluator. This basic protocol
+is correct and private in the semi-honest setting, which will turn out to be
+sufficient for our purposes.
+
 %Secure multi-party computation (MPC) enables a computation within a group of
 %devices without revealing any participant's private information. MPC allows
 %verifiable computation, meaning the participants then may confirm the result of
@@ -139,5 +154,19 @@ more difficult to achieve in this setting).
 %runs in constant rounds and avoids costly latency.
 
 \paragraph{Anonymous tokens.}
+An anonymous token scheme is a two-party protocol involving a client and a
+server. The client interacts with the server to obtain tokens, which can later
+be redeemed with the server (e.g., to anonymously authenticate itself for some
+task). Importantly, the scheme should satisfy two core
+properties---\emph{unlinkability} and \emph{unforgeability}. Unlinkability
+ensures that the server cannot link a token's redemption with its respective
+issuance. Unforgeability ensures that a malicious client cannot create valid
+tokens on its own without the server.
 
 \paragraph{Anonymous proxies.}
+An anonymous proxy is a server that makes communications untraceable. For
+example, a client can communicate with a server via an anonymous proxy so that
+the server cannot learn the client's identity (i.e., IP address). A commonly
+used anonymous proxy is Tor, which is an onion routing network that encrypts
+routing information in such a way that prevents linking the origin and
+destination.
