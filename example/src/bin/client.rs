@@ -32,7 +32,7 @@ fn encrypt_msg(
         .expect("invalid server pubkey!");
         
         // seal in place will encrypt the plaintext in place if success
-        let mut msg_copy = msg.to_vec();
+        let msg_copy = msg.to_vec();
 
         let ciphertext = encryption_context.seal(msg, aad).expect("encryption failed!");
 

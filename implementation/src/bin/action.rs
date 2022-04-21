@@ -3,7 +3,7 @@
 use std::net::{TcpListener, TcpStream, Shutdown};
 use std::thread;
 use std::fs::File;
-use implementation::format::{Message,MessageType,TransmissionData};
+use implementation::format::{Message,TransmissionData};
 use std::io::BufReader;
 use std::io::{Read};
 use hpke::{

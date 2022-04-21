@@ -1,5 +1,4 @@
-use std::net::{TcpListener, TcpStream, Shutdown};
-use std::fs::File;
+use std::net::{TcpStream, Shutdown};
 use implementation::format::{TransmissionData};
 use std::io::{Read, Write};
 use hpke::{
@@ -39,7 +38,7 @@ fn main() {
 
         Ok(mut stream) => {
             println!("Connected to the trigger!");
-            stream.write(&requested_data).unwrap();
+            // stream.write(&requested_data).unwrap();
 
             let mut received_data = [0 as u8; 5000];
 
@@ -54,6 +53,9 @@ fn main() {
                         Ok(mut stream) => {
                             println!("Connected to the trigger!");
                             stream.write(&received_data).unwrap();
+                        },
+                        Err(e) => {
+                            println!("Failed to receive data: {}", e);
                         }
                     }
                 }
@@ -61,6 +63,10 @@ fn main() {
                     println!("Failed to receive data: {}", e);
                 }
             }
+        },
+        Err(e) => {
+            println!("Failed to receive data: {}", e);
         }
     }
+    
 }
