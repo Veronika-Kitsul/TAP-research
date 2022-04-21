@@ -60,52 +60,83 @@ behaviour that would leak sensitive information. Therefore, this paper is trying
 to minimize the amount of data TAP has an access to so that when its security is
 compromised, attackers can gain as little data as possible.
 
-\subsection{Cryptographic tools}
+\subsection{Cryptographic building blocks}
 
 \paragraph{Public-key encryption.}
 
-\kl{TODO}
+Public key encryption is used to create secure communication channels between
+parties. In a public-key encryption scheme, the recipient generates a pair of
+keys $(\sk, \pk)$, where $\sk$ is the secret key and $\pk$ is the public key. A
+sender can encrypt a message $m$ under the recipient's public key to obtain a
+ciphertext $c = \enc(\pk, m)$. The recipient can decrypt the ciphertext with its
+secret key $\sk$ to recover the message $m = \dec(\sk, c)$.
 
 \paragraph{Multi-party computation.}
 
-Secure multi-party computation (MPC) enables a computation within a group of
-devices without revealing any participant's private information. MPC allows
-verifiable computation, meaning the participants then may confirm the result of
-the function they agreed on computing. Since its invention by Andrew Yao in
-1982, the topic has attracted many researchers and evolved from theory to an
-important practical tool for all kinds of applications
-~\cite{DBLP:journals/ftsec/EvansKR18}.
+Multi-party computation (MPC) is a protocol that allows a group of mutually
+distrusting parties to jointly compute some function while preserving certain
+security properties, even if some parties are malicious (e.g., they may try to
+learn private information or cause the result of the computation to be
+incorrect). Two of the most basic security requirements of MPC, then, are
+\emph{correctness} and \emph{privacy}.
 
-None of the parties trusts each other nor do they trust any third party. We use
-the two-party scenario (also called 2PC) and set it up between user---TAP. MPC
-assumes direct secure channels between each pair and denotes encryption and
-decryption of a message $m$ under key $\kappa$ as $\mathsf{Enc}_\kappa(m)$ and
-$\mathsf{Dec}_\kappa(m)$ with the goal to learn the correct output of a mutual
-function without revealing private inputs.
+Suppose there is a group of $n$ parties $P_1, \ldots, P_n$, where each party
+$P_i$ holds a private input $x_i$. The parties wish to jointly compute some
+agreed upon function $f(x_1, \ldots, x_n)$ over their private inputs (e.g.,
+$x_i$ could be each party's salary and the function $f$ computes the average
+salary). Correctness ensures that jointly computing $f(x_1, \ldots, x_n)$
+returns the actual average, even in the face of adversarial behavior (parties
+can, of course, still lie about their salaries). Privacy ensures that each party
+involved in the protocol learns nothing about the private inputs of other
+parties, besides what can be inferred from the output of the function (e.g., a
+party involved in a two-party computation of the ``average'' function can still
+infer the other party's input).
 
-Our MPC will also use semi-honest adversary model. Semi-honest model corrupts
-parties but follows the protocol. However, the corrupt parties may try to learn
-as much as possible from the messages they receive. They cannot take any actions
-other than observe protocol execution, so they are also called
-\emph{honest-but-curious}.
+It is also important to specify what ``adversarial'' or ``malicious'' behavior
+entails. In the semi-honest or ``honest-but-curious'' setting, all parties
+followed the prescribed protocol faithfully, but passively try to learn more
+information than intended. In the malicious setting, parties can arbitrarily
+deviate from the prescribed protocol (correctness and privacy are, of course,
+more difficult to achieve in this setting).
 
-Under semi-honest adversaries, a protocol $\pi$ securely executes $\phi$ if
-there exists a simulator $\mathsf{Sim}$ such that for every subset of corrupt
-parties $C$ and all inputs $x_1, ..., x_n$ the distributions under real-ideal
-paradigm
-\begin{gather*}
-  \mathsf{Real}_{\pi}(\kappa, C, x_1, ..., x_n) \\
-  \mathsf{Ideal}_{\phi, \mathsf{Sim}} (\kappa, C, x_1, ..., x_n)
-\end{gather*} 
-are indistinguishable in $\kappa$.
-
-The first garbled circuits protocol was introduced by Yao a few years after his
-first publication on MPC. It remains the basis for some of the most efficient
-MPC implementations. Yao's Garbled Circuits operate on the idea that there is a
-function $F(x,y)$, party $P_1$ holds $x \in X$, and party $P_2$ holds $y \in Y$.
-Yao's garbled circuits protocol (GC) is the most widely known MPC technique that
-is also best performing. It is not associated with communication complexity but
-runs in constant rounds and avoids costly latency.
+%Secure multi-party computation (MPC) enables a computation within a group of
+%devices without revealing any participant's private information. MPC allows
+%verifiable computation, meaning the participants then may confirm the result of
+%the function they agreed on computing. Since its invention by Andrew Yao in
+%1982, the topic has attracted many researchers and evolved from theory to an
+%important practical tool for all kinds of applications
+%~\cite{DBLP:journals/ftsec/EvansKR18}.
+%
+%None of the parties trusts each other nor do they trust any third party. We use
+%the two-party scenario (also called 2PC) and set it up between user---TAP. MPC
+%assumes direct secure channels between each pair and denotes encryption and
+%decryption of a message $m$ under key $\kappa$ as $\mathsf{Enc}_\kappa(m)$ and
+%$\mathsf{Dec}_\kappa(m)$ with the goal to learn the correct output of a mutual
+%function without revealing private inputs.
+%
+%Our MPC will also use semi-honest adversary model. Semi-honest model corrupts
+%parties but follows the protocol. However, the corrupt parties may try to learn
+%as much as possible from the messages they receive. They cannot take any actions
+%other than observe protocol execution, so they are also called
+%\emph{honest-but-curious}.
+%
+%Under semi-honest adversaries, a protocol $\pi$ securely executes $\phi$ if
+%there exists a simulator $\mathsf{Sim}$ such that for every subset of corrupt
+%parties $C$ and all inputs $x_1, ..., x_n$ the distributions under real-ideal
+%paradigm
+%\begin{gather*}
+%  \mathsf{Real}_{\pi}(\kappa, C, x_1, ..., x_n) \\
+%  \mathsf{Ideal}_{\phi, \mathsf{Sim}} (\kappa, C, x_1, ..., x_n)
+%\end{gather*} 
+%are indistinguishable in $\kappa$.
+%
+%The first garbled circuits protocol was introduced by Yao a few years after his
+%first publication on MPC. It remains the basis for some of the most efficient
+%MPC implementations. Yao's Garbled Circuits operate on the idea that there is a
+%function $F(x,y)$, party $P_1$ holds $x \in X$, and party $P_2$ holds $y \in Y$.
+%Yao's garbled circuits protocol (GC) is the most widely known MPC technique that
+%is also best performing. It is not associated with communication complexity but
+%runs in constant rounds and avoids costly latency.
 
 \paragraph{Anonymous tokens.}
 
