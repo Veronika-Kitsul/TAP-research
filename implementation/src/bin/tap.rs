@@ -38,31 +38,30 @@ fn main() {
 
         Ok(mut stream) => {
             println!("Connected to the trigger!");
-            // stream.write(&requested_data).unwrap();
-
+            stream.write(requested_data).unwrap();
+            println!("wrote the data");
             let mut received_data = [0 as u8; 5000];
 
-            match stream.read_exact(&mut received_data) {
-                Ok(data) => {
-
-                    println!("{:?}", received_data);
-
+            while match stream.read(&mut received_data) {
+                Ok(size) => {
                     // connect to the action service
                     match TcpStream::connect("127.0.0.1:8082") {
 
                         Ok(mut stream) => {
-                            println!("Connected to the trigger!");
-                            stream.write(&received_data).unwrap();
+                            println!("Connected to the action!");
+                            stream.write(&received_data[0..size]).unwrap();
                         },
                         Err(e) => {
                             println!("Failed to receive data: {}", e);
                         }
                     }
+                    true
                 }
                 Err(e) => {
                     println!("Failed to receive data: {}", e);
+                    false
                 }
-            }
+            }{}
         },
         Err(e) => {
             println!("Failed to receive data: {}", e);

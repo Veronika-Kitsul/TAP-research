@@ -40,12 +40,13 @@ fn encrypt_msg(
 
         let encapsulated_key_vec = encapsulated_key.to_bytes().to_vec();
 
+        println!("encrypted data in the trigger");
         TransmissionData{encapped_key: encapsulated_key_vec, cyphertext: ciphertext}
     }
 
-fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) -> Vec<u8> {
+fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) {
     let mut data = [0 as u8; 5000]; 
-    match stream.read(&mut data) {
+    while match stream.read(&mut data) {
         Ok(size) => {
             let aad = b"";
             let content = "Hello";
@@ -60,14 +61,15 @@ fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) -> V
             // encrypt the message 
             let data = encrypt_msg(&serialized, aad, &pub_key);
             let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
-            data_serialized
+            stream.write(&data_serialized[0..size]).unwrap();
+            true
         },
         Err(e) => {
             println!("An error occured, terminating connection with {}", stream.peer_addr().unwrap());
             stream.shutdown(Shutdown::Both).unwrap();
-            vec![]
+            false
         }
-    }
+    }{}
 }
 
 fn main() {
@@ -81,42 +83,20 @@ fn main() {
 
 
     // Listen for connections on a loop
-    let listener = TcpListener::bind("127.0.0.1:8081").unwrap();
+    let listener = TcpListener::bind("127.0.0.1:8080").unwrap();
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
                 println!("New connection: {}", stream.peer_addr().unwrap());
                 // deserialize into private key type from the file
                 let pub_key: <Kem as KemTrait>::PublicKey =
-                    Deserializable::from_bytes(&pub_key_bytes).unwrap();                             
+                    Deserializable::from_bytes(&pub_key_bytes).unwrap();    
+
                 thread::spawn(move || {
-
+                    println!("in the thread");
                     handle_tap(stream, pub_key);
-                    // Open a connection to the tap on port 8081
-                    match TcpStream::connect("127.0.0.1:8081") {
-
-                        Ok(mut stream) => {
-                            println!("Connected to the TAP!");
-                            //stream.write(&data_serialized).unwrap();
-        
-                            let mut data = [0 as u8; 5000];
-        
-                            match stream.read_exact(&mut data) {
-                                Ok(data) => {
-                                    println!("{:?}", data)
-                                },
-                                
-                                Err(e) => {
-                                    println!("Failed to receive data: {}", e);
-                                }
-                            }
-                        },
-                        
-                        Err(e) => {
-                            println!("Failed to connect: {}", e);
-                        },
-                    }
                 });
+
                 println!("Terminated.");
             }
 
@@ -124,6 +104,6 @@ fn main() {
                 println!("Error: {}", e)
             }
         }
-        drop(&listener);
     }
+    drop(listener);
 }

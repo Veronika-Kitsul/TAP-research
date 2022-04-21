@@ -28,7 +28,7 @@ fn decrypt_msg(
 {
     // Initiates a decryption context given a private key sk_recip and an encapsulated key 
     // which was encapsulated to sk_recip's corresponding public key
-     let encapped_key = hpke::Deserializable::from_bytes(&encapped_key).unwrap();
+    let encapped_key = hpke::Deserializable::from_bytes(&encapped_key).unwrap();
 
     let mut decryption_context =
     hpke::setup_receiver::<Aead, Kdf, Kem>(

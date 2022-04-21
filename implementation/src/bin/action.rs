@@ -28,7 +28,7 @@ fn decrypt_msg(
 {
     // Initiates a decryption context given a private key sk_recip and an encapsulated key 
     // which was encapsulated to sk_recip's corresponding public key
-     let encapped_key = hpke::Deserializable::from_bytes(&encapped_key).unwrap();
+    let encapped_key = hpke::Deserializable::from_bytes(&encapped_key).unwrap();
 
     let mut decryption_context =
     hpke::setup_receiver::<Aead, Kdf, Kem>(
@@ -38,6 +38,7 @@ fn decrypt_msg(
         INFO_STR,
     ).expect("failed to set up receiver!");
 
+    println!("decrypting");
     let plaintext = decryption_context.open(&ciphertext, b"").expect("invalid ciphertext!");
     plaintext
 }
@@ -46,9 +47,8 @@ fn handle_client(mut stream: TcpStream, priv_key: <Kem as KemTrait>::PrivateKey)
     let mut data = [0 as u8; 5000]; 
     while match stream.read(&mut data) {
         Ok(size) => {
-
-            let data_deserialized: TransmissionData =
-            bincode::deserialize(&data).unwrap();
+            println!("in handle client");
+            let data_deserialized: TransmissionData = bincode::deserialize(&data).unwrap();
 
             let cyphertext = data_deserialized.cyphertext;
             let encapped_key = data_deserialized.encapped_key;
@@ -79,7 +79,7 @@ fn main() {
         // Read file into vector.
         reader.read_to_end(&mut priv_key_bytes).unwrap();
 
-    let listener = TcpListener::bind("127.0.0.1:8081").unwrap();
+    let listener = TcpListener::bind("127.0.0.1:8082").unwrap();
 
     // Listen for connections on a loop
     for stream in listener.incoming() {
@@ -91,6 +91,7 @@ fn main() {
                     Deserializable::from_bytes(&priv_key_bytes).unwrap();      
 
                 thread::spawn(move || {
+                    println!("handle client sending");
                     handle_client(stream, priv_key)
                 });
             }
