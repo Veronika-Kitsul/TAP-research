@@ -3,62 +3,69 @@
 
 \subsection{Trigger-action systems}
 
-Trigger-action systems have three main components: trigger services (TS), action
-services (AS), and the trigger-action platform (TAP). Clients interact with TAPs
+Trigger-action systems, such as IFTTT, Zapier, and Microsoft Power Automate, are
+automation tools that allow users to connect third-party services (often IoT
+devices) to perform various automation tasks. Trigger-action systems have three
+main components: trigger services (TS), action services (AS), and the
+trigger-action platform (TAP). Clients interact with trigger-action systems
 through trusted computing devices (typically their
 smartphones)~\cite{DBLP:conf/sp/ChenCWSCF21}. Clients configure ``recipes'' with
-the TAP by specifying triggers (i.e., ``if my Fitbit sends a sleep data'') and
-actions (i.e., ``create a Google Calendar reminder to sleep more''). \kl{TODO:
-  Update example.}
+the TAP by specifying triggers (i.e., ``if I receive an email that contains
+\emph{urgent} in the subject line'') and actions (i.e., ``send email info
+to my smartphone via SMS''). The TAP will connect to the client's email and SMS
+providers and execute the specified recipe. However, this means that trigger
+services must forward sensitive data to the TAP in order for recipes to be
+executed. These risks have prevented privacy-conscious companies and their users
+from integrating with existing TAPs.
 
-\kl{TODO: Update rest.} TAPs do not require their users to have any technical
-skills to build complicated automated functions for their everyday use, which is
-one of the reasons for their popularity. In addition, they can find hundreds of
-ready-made applets for their usage by simply typing the services they want to
-integrate. The templates are published by both the developers to ease people's
-lives and by the users themselves, who would like to share their applets with
-community. Those are not known to be regulated in any way.
+%\kl{TODO: Update rest.} TAPs do not require their users to have any technical
+%skills to build complicated automated functions for their everyday use, which is
+%one of the reasons for their popularity. In addition, they can find hundreds of
+%ready-made applets for their usage by simply typing the services they want to
+%integrate. The templates are published by both the developers to ease people's
+%lives and by the users themselves, who would like to share their applets with
+%community. Those are not known to be regulated in any way.
 
-Some recipes, however, involve sensitive data. Surbatovich et al.\kl{cite}
-describes a potential case, in which an applet of a type ``open the window if
-the temperature is above a threshold'' could enable attackers to affect the
-temperature to open the windows when nobody is in the house.
+%Some recipes, however, involve sensitive data. Surbatovich et al.\kl{cite}
+%describes a potential case, in which an applet of a type ``open the window if
+%the temperature is above a threshold'' could enable attackers to affect the
+%temperature to open the windows when nobody is in the house.
 
 %add a citation to websites of community applets on different platforms
 
-\subsection{Market analysis}
-Today's market of trigger-action platforms is fairly extensive and includes many
-alternatives to IFTTT.  There is only one comparative study of such applications
-that looks at IFTTT, Zapier, Integromat, Microsoft Power Automate, and Parabola
-(there is another study that compares only IFTTT and
-Zapier)~\cite{DBLP:conf/icict2/AbdouEF21}. However, there are way more many TAPs
-than that. Others include Automate.io, Zoho Flow, Tasker, Workflow, Huginn,
-Elastic.io, Workato, Actiondesk, Scriptable.
-
-Platforms' capabilities also depend on the pricing plan the user is at. For
-example, Zapier gives an opportunity to make 100,000 tasks per month with
-unlimited multi-step applets and updates services each minute in a Company
-plan. Conversely, free plan gives only 5 single-step applets with 100 tasks per
-month and update time of 15 minutes.
-
-Zapier, IFTTT, and Integromate all integrate messages, calls, GPS, Wi-Fi,
-photos, and contacts. Abdou et al.~\cite{DBLP:conf/icict2/AbdouEF21} writes that
-``they can send and save SMS messages, check the incoming class and give more
-information about the caller, save the numbers you call, automate actions based
-on phone location, record motion of the phone, track locations, get
-notifications when employees connect or disconnect to the Wi-Fi, turn off Wi-Fi
-automatically, backup photos, send/upload contacts from/to your phone.'' Zapier
-also integrates with over 2000 applications as major technology companies are
-interested in partnering with it.
-% why????
-
-All platforms, however, have one thing in common---security vulnerability. By
-attacking only one digital automation platform, hackers may extract information
-from all integrated applications and devices that may expose users to physical
-or verbal threats. Sometimes, mistake on users behalf may lead to unexpected
-behaviour that would leak sensitive information. Therefore, this paper is trying
-to minimize the amount of data TAP has an access to so that when its security is
-compromised, attackers can gain as little data as possible.
+%\subsection{Market analysis}
+%Today's market of trigger-action platforms is fairly extensive and includes many
+%alternatives to IFTTT.  There is only one comparative study of such applications
+%that looks at IFTTT, Zapier, Integromat, Microsoft Power Automate, and Parabola
+%(there is another study that compares only IFTTT and
+%Zapier)~\cite{DBLP:conf/icict2/AbdouEF21}. However, there are way more many TAPs
+%than that. Others include Automate.io, Zoho Flow, Tasker, Workflow, Huginn,
+%Elastic.io, Workato, Actiondesk, Scriptable.
+%
+%Platforms' capabilities also depend on the pricing plan the user is at. For
+%example, Zapier gives an opportunity to make 100,000 tasks per month with
+%unlimited multi-step applets and updates services each minute in a Company
+%plan. Conversely, free plan gives only 5 single-step applets with 100 tasks per
+%month and update time of 15 minutes.
+%
+%Zapier, IFTTT, and Integromate all integrate messages, calls, GPS, Wi-Fi,
+%photos, and contacts. Abdou et al.~\cite{DBLP:conf/icict2/AbdouEF21} writes that
+%``they can send and save SMS messages, check the incoming class and give more
+%information about the caller, save the numbers you call, automate actions based
+%on phone location, record motion of the phone, track locations, get
+%notifications when employees connect or disconnect to the Wi-Fi, turn off Wi-Fi
+%automatically, backup photos, send/upload contacts from/to your phone.'' Zapier
+%also integrates with over 2000 applications as major technology companies are
+%interested in partnering with it.
+%% why????
+%
+%All platforms, however, have one thing in common---security vulnerability. By
+%attacking only one digital automation platform, hackers may extract information
+%from all integrated applications and devices that may expose users to physical
+%or verbal threats. Sometimes, mistake on users behalf may lead to unexpected
+%behaviour that would leak sensitive information. Therefore, this paper is trying
+%to minimize the amount of data TAP has an access to so that when its security is
+%compromised, attackers can gain as little data as possible.
 
 \subsection{Cryptographic building blocks}
 

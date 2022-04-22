@@ -2,58 +2,71 @@
 \label{sec:intro}
 
 Internet of Things (IoT) devices are becoming ubiquitous, with more than ten
-billion active devices in 2021~\cite{DBLP:webpage/Bojan/IoTstats}. As users
-increasingly use IoT devices in their smart homes, the ability to connect
-devices to one another is a useful automation technique for performing small and
-monotonous tasks. To facilitate this automation, trigger-action platforms (TAPs)
-offer a platform for connecting and integrating these third-party IoT
-services~\cite{DBLP:journals/access/XuZZCDG19, DBLP:conf/chi/UrHBLMPSL16}.
+billion active devices as of 2021~\cite{DBLP:webpage/Bojan/IoTstats}. As users
+increasingly use IoT devices in their smart homes, the ability to connect and
+configure differences devices together to perform small tasks is a useful
+automation technique. To facilitate this automation, trigger-action systems
+offer a platform for connecting and integrating third-party
+services~\cite{DBLP:journals/access/XuZZCDG19, DBLP:conf/chi/UrHBLMPSL16}. One
+of the first and most popular trigger-action services is IFTTT (``If This Then
+That''), which works with over 700 services and more than 20 million users
+worldwide~\cite{ifttt-website, DBLP:conf/sp/ChenCWSCF21}.
 
-Trigger-action platforms (TAPs) comprise several parts: \emph{services},
-\emph{platforms}, and \emph{recipes}. A client can install a recipe that
-connects two services together on a platform. For example, suppose the client
-wears a Fitbit to track their sleep duration. If the Fitbit records a sleep
-duration under some target duration, the platform adds a reminder to the
-client's Google Calendar to sleep more the next day. The platform connects the
-Fitbit and Google Calendar services together through the recipe ``If sleep is
-under a target duration, then add a reminder to Google Calendar.'' \kl{TODO: New
-  example.}
+Trigger-action systems comprise several parts: \emph{services}, the
+\emph{trigger-action platform} (TAP), and \emph{recipes}. Clients can specify
+and install recipes that connect services together and automatically execute on
+the TAP. For example, suppose a client wants to receive immediate SMS
+notifications for urgent emails. The client can connect their email and SMS
+providers together with the recipe ``If I receive an email with \emph{urgent} in
+the subject line, then send the email information to my smartphone via SMS.''
+The TAP will receive the client's emails, check the subject lines for the
+\emph{urgent} keyword, and send an SMS to the client's smartphone if so.
+%
+%If the Fitbit records a sleep
+%duration under some target duration, the platform adds a reminder to the
+%client's Google Calendar to sleep more the next day. The platform connects the
+%Fitbit and Google Calendar services together through the recipe ``If sleep is
+%under a target duration, then add a reminder to Google Calendar.'' \kl{TODO: New
+%  example.}
 %\kl{This 
 %example is from the Walnut paper~\cite{DBLP:journals/corr/abs-2009-12447}, but we should come with
 %another, more compelling example by analyzing more applets real people use.} 
 
-One of the first and most popular TAPs is IFTTT (``If This Then That''), which
-works with over 700 services and more than 20 million users around the
-world~\cite{ifttt-website, DBLP:conf/sp/ChenCWSCF21}.  Because IFTTT has access
-to a vast number of devices and users' data, and computes over sensitive data to
-run millions of recipes on users' behalf, a data breach could have severe
-consequences. Many scholars have examined IFTTT-like services for years to point
-out their numerous security and privacy flaws and suggest better
+TAPs have access to a vast number of users' devices and sensitive information,
+so a data breach could lead to severe consequences. In fact, many researchers
+have studied trigger-action systems for years to point out their numerous
+security and privacy flaws and suggest better
 practices~\cite{DBLP:conf/sp/ChenCWSCF21, DBLP:journals/corr/abs-2009-12447,
   DBLP:conf/imc/MiQZW17, DBLP:journals/corr/FernandesRJP17,
-  DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}.  Even with
-security countermeasures in place, privacy-conscious companies may not integrate
-with IFTTT, because the platform would learn sensitive information about their
-users.
+  DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}. However,
+even with security countermeasures in place, the privacy risks remain. This has
+prevented many privacy-conscious companies from integrating with trigger-action
+systems, because TAPs can harvest sensitive information about their users.
 
 For example, today's TAPs learn at least the following information about clients:
 \begin{itemize}
-  \item the services (both trigger and action, for example Fitbit and Google Calendar),
-  \item the recipe semantics (``If sleep is under a target duration, then add a
-    reminder to Google Calendar.''),
-  \item inputs to the applet (sleep duration), and
-  \item outputs to the action service (the reminder).
+  \item the trigger and action services (the client's email and SMS providers),
+  \item the recipe semantics (``If I receive an email with \emph{urgent} in the
+    subject line, then send the email information to my smartphone via SMS.''),
+  \item inputs to the recipe (email subject lines), and
+  \item outputs to the action service (the client's phone number).
 \end{itemize}
 
-Privacy-preserving TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and
-Walnut~\cite{DBLP:journals/corr/abs-2009-12447}) propose using multi-party
-computation (MPC) to hide inputs to the applet from the TAP. However, prior work
-does not cover all of the abovementioned sources of leakage and has considerable
+In light of these privacy risks, researchers have proposed privacy-preserving
+TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and
+Walnut~\cite{DBLP:journals/corr/abs-2009-12447}), which use multi-party
+computation (MPC) to hide recipe inputs from the TAP. However, prior work does
+not cover all of the abovementioned sources of leakage and has considerable
 performance overhead. Ideally, the TAP should learn no information about the
-client (besides timing information). In this paper, we ask if such a TAP design
-is possible, and if so, what are the costs.
+client (besides timing information) and should be able to scale to the volume of
+users and recipes executed in modern TAPs. In this paper, we present \sys, a
+privacy-preserving trigger-action platform that combines privacy-enhancing
+technologies, such as end-to-end encryption, multi-party computation, anonymous
+tokens, and anonymous proxies, in such a way that leads to low performance
+overhead. We find that \sys supports most commonly used TAP functionality today
+and does so at low cost.
 
-Our main contributions are the following:
+To summarize, our main contributions are the following:
 \begin{itemize}
   \item We propose \sys, a trigger-action platform that achieves strong privacy
     and anonymity guarantees.
