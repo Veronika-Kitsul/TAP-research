@@ -2,6 +2,12 @@
 \label{sec:discussion}
 
 \subsection{Main findings}
+Our main finding is that through \sys's clever system design, we can achieve
+privacy-preserving trigger-action execution at scale. In fact, a majority of the
+most commonly used recipes can be privately executed without the use of an
+expensive MPC protocol, since our design pushes predicate computations to the
+trigger services. Still, \sys is general-purpose in that recipes requiring
+nontrivial transformations can still be executed via MPC on the TAP.
 
 \begin{figure}
 \includegraphics[width=9cm]{../graphics/etap.png}
@@ -12,6 +18,16 @@
 
 
 \subsection{Limitations}
+One limitation is that \sys' design does depart from the design of existing
+TAPs, whether privacy-preserving or not. Specifically, moving the computation of
+predicates to trigger services does mean that they have to do more
+work. However, we believe the large performance savings of not having to execute
+them in MPC make this trade-off worth it. In fact, generating garbled inputs for
+MPC is likely to be more expensive than simply executing the predicates
+natively.
+
+Although \sys' design is somewhat of a departure from existing TAPs, whether
+privacy-preserving or not, we find that the performance gains
 
 \subsection{Future work}
 
