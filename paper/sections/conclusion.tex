@@ -1,12 +1,24 @@
 \section{Conclusion}
 \label{sec:conclusion}
 
-This paper builds upon previous work in testing out security designs that would make trigger-action
-platforms more secure. Security here is based on the principle that if TAP knows nothing, then it is able
-to leak nothing. In reality, however, no system is perfectly secure, but we design a security scheme that
-would allow to hide as much as possible. The proposed system operates on Garbled Circuits protocol
-in the MPC library available on C++ in open source and functions as other TAPs on the market. But the
-TAP itself does not know about the information it is getting, both the trigger and action do not know each
-other, ELSE?
+In this work, we set out to build a trigger-action platform that is both
+practically efficient and provides strong privacy and anonymity guarantees,
+culminating in \sys. Starting from previous work on privacy-preserving
+trigger-action platforms using MPC, we make several important observations that
+allow us to replace expensive MPC computations with cheap, native executions. We
+also extend previous work by proposing a new anonymity protocol that
+additionally hides sensitive metadata (e.g., the services involved and recipe
+semantics). We find that \sys can indeed support the most common functionality
+used in today's TAPs with cheap cryptographic tools and can reserve expensive
+MPC for special-case recipes. In sum, \sys offers a new point in the design
+space that provides both practicality and privacy.
 
-Talk about our quantative results
+%This paper builds upon previous work in testing out security designs that would make trigger-action
+%platforms more secure. Security here is based on the principle that if TAP knows nothing, then it is able
+%to leak nothing. In reality, however, no system is perfectly secure, but we design a security scheme that
+%would allow to hide as much as possible. The proposed system operates on Garbled Circuits protocol
+%in the MPC library available on C++ in open source and functions as other TAPs on the market. But the
+%TAP itself does not know about the information it is getting, both the trigger and action do not know each
+%other, ELSE?
+%
+%Talk about our quantative results

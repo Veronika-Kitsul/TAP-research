@@ -1,6 +1,7 @@
 use std::net::{TcpStream, Shutdown};
 use implementation::format::{TransmissionData};
 use std::io::{Read, Write};
+use std::time::{SystemTime, UNIX_EPOCH};
 use hpke::{
     aead::{AeadTag, ChaCha20Poly1305},
     kdf::HkdfSha384,
@@ -38,6 +39,7 @@ fn main() {
 
         Ok(mut stream) => {
             println!("Connected to the trigger!");
+            println!("Poll time: {:?}", SystemTime::now());
             stream.write(requested_data).unwrap();
             println!("wrote the data");
             let mut received_data = [0 as u8; 5000];

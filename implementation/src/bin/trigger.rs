@@ -109,6 +109,6 @@ fn main() {
 }
 
 
-fn test1() {
-    
+fn test1() -> String {
+    "Test".to_string()
 }

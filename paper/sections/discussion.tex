@@ -18,18 +18,43 @@ nontrivial transformations can still be executed via MPC on the TAP.
 
 
 \subsection{Limitations}
-One limitation is that \sys' design does depart from the design of existing
+One limitation is that \sys's design does depart from the design of existing
 TAPs, whether privacy-preserving or not. Specifically, moving the computation of
 predicates to trigger services does mean that they have to do more
 work. However, we believe the large performance savings of not having to execute
-them in MPC make this trade-off worth it. In fact, generating garbled inputs for
-MPC is likely to be more expensive than simply executing the predicates
+them in MPC makes this trade-off worth it. In fact, generating garbled inputs
+for MPC is likely to be more expensive than simply executing the predicates
 natively.
 
-Although \sys' design is somewhat of a departure from existing TAPs, whether
-privacy-preserving or not, we find that the performance gains
+Another limitation inherited from previous work, such as
+\textsf{eTAP}~\cite{DBLP:conf/sp/ChenCWSCF21}, is that the client is not
+completely offline, but periodically uploads new garbled circuits to the
+TAP. Still, this allows considerable performance improvements, since the garbled
+circuits are trusted, so a cheaper semi-honest garbled circuits protocol can be
+used.
+
+Another limitation is in the anonymity protocol, which is that it requires the
+use of an anonymity proxy, which has its own set of security and privacy
+challenges and introduces latency. Moreover, scaling the anonymity proxy to
+support the volume of users and recipes executed on today's TAPs may be
+challenging.
 
 \subsection{Future work}
+
+There are may directions for future work. An immediate direction for future work
+is to implement the full \sys system that guarantees privacy and anonymity, thus
+opening up a broader set of recipes that can be privately executed.  It would
+also be interesting to do a measurement study of popular recipes in existing
+trigger-action systems to determine to what degree recipes are sensitive. For
+example, only a small percentage of recipes may involve sensitive inputs and
+outputs, but a larger percentage of rules might leak sensitive metadata, e.g.,
+the services involved or the recipe semantics.
+
+Other future work addresses the aforementioned limitations of this work. For
+example, can we design a practical, privacy-preserving TAP that does not require
+the client to upload garbled circuits periodically? Additionally, can we design
+a TAP that achieves privacy and anonymity (to some degree) without the use of an
+anonymity proxy?
 
 %Things we want to hide from the TAP (in order from most important to least
 %important):

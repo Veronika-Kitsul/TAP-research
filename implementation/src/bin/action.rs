@@ -6,6 +6,7 @@ use std::fs::File;
 use implementation::format::{Message,TransmissionData};
 use std::io::BufReader;
 use std::io::{Read};
+use std::time::{SystemTime, UNIX_EPOCH};
 use hpke::{
     aead::{AeadTag, ChaCha20Poly1305},
     kdf::HkdfSha384,
@@ -55,6 +56,7 @@ fn handle_client(mut stream: TcpStream, priv_key: <Kem as KemTrait>::PrivateKey)
             let plaintext = decrypt_msg(&cyphertext, &priv_key, &encapped_key, INFO_STR);
             let msg: Message = bincode::deserialize(&plaintext).unwrap();
             let msg_string = std::str::from_utf8(&msg.contents).unwrap();
+            println!("End time: {:?}", SystemTime::now());
             println!("{:?}", msg);
             println!("message: {}", msg_string);
             false
