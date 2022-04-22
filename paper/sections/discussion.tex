@@ -9,14 +9,8 @@ expensive MPC protocol, since our design pushes predicate computations to the
 trigger services. Still, \sys is general-purpose in that recipes requiring
 nontrivial transformations can still be executed via MPC on the TAP.
 
-\sys's design also supports varying levels of privacy and anonymity, which gives
-clients a choice for the guarantees they want for particular recipes. This is
-useful, since recipes are not all created equal. For some recipes, even learning
-the services involved can pose a privacy risk. For others, perhaps the services
-involved are not sensitive, but the inputs and outputs of the recipes are. For
-yet others, perhaps the client does not deem a particular recipe to be sensitive
-at all, so it can be executed plainly on the TAP, thus lowering costs.
- 
+\includegraphics[width=9cm]{../graphics/etap.png}
+
 \subsection{Limitations}
 One limitation is that \sys' design does depart from the design of existing
 TAPs, whether privacy-preserving or not. Specifically, moving the computation of

@@ -38,7 +38,6 @@ fn decrypt_msg(
         INFO_STR,
     ).expect("failed to set up receiver!");
 
-    println!("decrypting");
     let plaintext = decryption_context.open(&ciphertext, b"").expect("invalid ciphertext!");
     plaintext
 }
@@ -47,7 +46,6 @@ fn handle_client(mut stream: TcpStream, priv_key: <Kem as KemTrait>::PrivateKey)
     let mut data = [0 as u8; 5000]; 
     while match stream.read(&mut data) {
         Ok(size) => {
-            println!("in handle client");
             let data_deserialized: TransmissionData = bincode::deserialize(&data).unwrap();
 
             let cyphertext = data_deserialized.cyphertext;
@@ -59,7 +57,7 @@ fn handle_client(mut stream: TcpStream, priv_key: <Kem as KemTrait>::PrivateKey)
             let msg_string = std::str::from_utf8(&msg.contents).unwrap();
             println!("{:?}", msg);
             println!("message: {}", msg_string);
-            true
+            false
         }
         Err(e) => {
             println!("An error occured, terminating connection with {}", stream.peer_addr().unwrap());

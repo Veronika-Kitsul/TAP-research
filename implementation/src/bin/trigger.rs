@@ -49,7 +49,7 @@ fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) {
     while match stream.read(&mut data) {
         Ok(size) => {
             let aad = b"";
-            let content = "Hello";
+            let content = test1();
 
             let msg = Message {
                 msgtype: MessageType::TriggerToTAP,
@@ -61,7 +61,7 @@ fn handle_tap(mut stream: TcpStream, pub_key: <Kem as KemTrait>::PublicKey) {
             // encrypt the message 
             let data = encrypt_msg(&serialized, aad, &pub_key);
             let data_serialized: Vec<u8> = bincode::serialize(&data).unwrap();
-            stream.write(&data_serialized[0..size]).unwrap();
+            stream.write(&data_serialized).unwrap();
             true
         },
         Err(e) => {
@@ -106,4 +106,9 @@ fn main() {
         }
     }
     drop(listener);
+}
+
+
+fn test1() {
+    
 }
