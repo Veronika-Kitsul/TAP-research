@@ -20,8 +20,8 @@ notifications for urgent emails. The client can connect their email and SMS
 providers together with the recipe ``If I receive an email with \emph{urgent} in
 the subject line, then send the email information to my smartphone via SMS.''
 The TAP will receive the client's emails, check the subject lines for the
-\emph{urgent} keyword, and send an SMS to the client's smartphone if so.
-%
+\emph{urgent} keyword, and send an SMS to the client's smartphone if present.
+
 %If the Fitbit records a sleep
 %duration under some target duration, the platform adds a reminder to the
 %client's Google Calendar to sleep more the next day. The platform connects the
@@ -32,45 +32,45 @@ The TAP will receive the client's emails, check the subject lines for the
 %example is from the Walnut paper~\cite{DBLP:journals/corr/abs-2009-12447}, but we should come with
 %another, more compelling example by analyzing more applets real people use.} 
 
-TAPs have access to a vast number of users' devices and sensitive information,
-so a data breach could lead to severe consequences. In fact, many researchers
-have studied trigger-action systems for years to point out their numerous
-security and privacy flaws and suggest better
+As a result, TAPs have access to a vast number of users' devices and sensitive
+information, so a data breach would lead to severe consequences. In fact, many
+researchers have studied trigger-action systems for years to point out their
+numerous security and privacy flaws and suggest better
 practices~\cite{DBLP:conf/sp/ChenCWSCF21, DBLP:journals/corr/abs-2009-12447,
   DBLP:conf/imc/MiQZW17, DBLP:journals/corr/FernandesRJP17,
   DBLP:conf/www/SurbatovichABDJ17, DBLP:journals/access/XuZZCDG19}. However,
 even with security countermeasures in place, the privacy risks remain. This has
 prevented many privacy-conscious companies from integrating with trigger-action
 systems, because TAPs can harvest sensitive information about their users.
-
 For example, today's TAPs learn at least the following information about clients:
 \begin{itemize}
   \item the trigger and action services (the client's email and SMS providers),
   \item the recipe semantics (``If I receive an email with \emph{urgent} in the
     subject line, then send the email information to my smartphone via SMS.''),
-  \item inputs to the recipe (email subject lines), and
+  \item inputs to the recipe (the client's emails), and
   \item outputs to the action service (the client's phone number).
 \end{itemize}
 
 In light of these privacy risks, researchers have proposed privacy-preserving
 TAPs (e.g., Chen et al.~\cite{DBLP:conf/sp/ChenCWSCF21} and
 Walnut~\cite{DBLP:journals/corr/abs-2009-12447}), which use multi-party
-computation (MPC) to hide recipe inputs from the TAP. However, prior work does
-not cover all of the abovementioned sources of leakage and has considerable
-performance overhead. Ideally, the TAP should learn no information about the
-client (besides timing information) and should be able to scale to the volume of
-users and recipes executed in modern TAPs. In this paper, we present \sys, a
-privacy-preserving trigger-action platform that combines privacy-enhancing
-technologies, such as end-to-end encryption, multi-party computation, anonymous
-tokens, and anonymous proxies, in such a way that leads to low performance
-overhead. We find that \sys supports most commonly used TAP functionality today
-and does so at low cost.
+computation (MPC) to hide recipe inputs and outputs from the TAP. However, prior
+work does not cover all of the abovementioned sources of leakage (the services
+and recipes involved) and has considerable performance overhead (expensive MPC
+computations). Ideally, the TAP should learn no information about the client
+(besides timing information) and should be able to scale to the volume of users
+and recipes supported by modern TAPs. In this paper, we present \sys, a
+practical, privacy-preserving trigger-action platform that combines
+privacy-enhancing technologies, such as end-to-end encryption, multi-party
+computation, anonymous tokens, and anonymous proxies. We find that \sys supports
+the most commonly used functionality today and does so with low computation and
+communication costs.
 
 To summarize, our main contributions are the following:
 \begin{itemize}
   \item We propose \sys, a trigger-action platform that achieves strong privacy
     and anonymity guarantees.
   \item We implement a prototype of \sys in Rust.
-  \item We find that our \sys protype supports the most commonly used TAP
+  \item We find that our \sys prototype supports the most commonly used TAP
     functionality and does so with low performance overhead.
 \end{itemize}

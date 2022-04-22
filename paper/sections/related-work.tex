@@ -5,25 +5,28 @@
 The $\mathsf{eTAP}$ system~\cite{DBLP:conf/sp/ChenCWSCF21} also aims to provide
 privacy for trigger-action platforms. We follow their approach of executing
 recipes using MPC, but find ways to reduce the amount of MPC required by
-half. Moreover, we also develop techniques to unlink the installed recipes from
-client identities.
+half. Moreover, we also develop techniques to unlink services and the installed
+recipes from client identities.
 
 \paragraph{Walnut.}
-
-
 Walnut~\cite{DBLP:journals/corr/abs-2009-12447} is another system that aims to
 provide privacy for trigger-action platforms using MPC, but using two
 non-colluding servers instead of one. They also do not consider how to unlink
-installed recipes from client identities.
+services and installed recipes from client identities.
+
+\paragraph{TAP OAuth security.}
+Several other
+works~\cite{DBLP:journals/corr/FernandesRJP17,DBLP:conf/ndss/FernandesRJP18}
+study the security risks of clients handing and storing OAuth tokens on
+TAPs. The studies find that OAuth tokens are often overprivileged and TAP
+compromise would lead to attackers being able to misuse OAuth tokens to
+manipulate client devices and data. DTAP~\cite{DBLP:conf/ndss/FernandesRJP18} is
+a TAP design that prevents untrusted TAPs from misusing compromised OAuth tokens.
 
 \paragraph{Other TAP studies.}
+There have been various other studies measuring TAP ecosystems, the most popular
+recipes used, and their security and privacy
+risks~\cite{DBLP:conf/sp/ChenCWSCF21,DBLP:conf/chi/UrHBLMPSL16,DBLP:conf/www/SurbatovichABDJ17,
+  DBLP:conf/imc/MiQZW17,DBLP:journals/corr/abs-2110-00068}.
 
-Privacy in trigger-action systems~\cite{DBLP:conf/sp/ChenCWSCF21}, analysis of
-IFTTT
-recipes~\cite{DBLP:conf/chi/UrHBLMPSL16,DBLP:conf/www/SurbatovichABDJ17, DBLP:conf/imc/MiQZW17},
-Walnut~\cite{DBLP:journals/corr/abs-2009-12447}, decentralized action
-integrity~\cite{DBLP:conf/ndss/FernandesRJP18},
-decoupled-IFTTT~\cite{DBLP:journals/corr/FernandesRJP17},
-Filter-Fuzz~\cite{DBLP:journals/access/XuZZCDG19},
-Charting the Attack Surface. \cite{DBLP:conf/ccs/WangDYL0G19}
-Dataset~\cite{DBLP:journals/corr/abs-2110-00068}
+%Filter-Fuzz~\cite{DBLP:journals/access/XuZZCDG19}
