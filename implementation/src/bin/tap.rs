@@ -55,7 +55,7 @@ fn main() {
                             println!("Failed to receive data: {}", e);
                         }
                     }
-                    true
+                    false
                 }
                 Err(e) => {
                     println!("Failed to receive data: {}", e);
